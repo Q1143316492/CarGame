@@ -43,9 +43,9 @@ void Graphics::RenderFrame()
 	// todo
 	//model.Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
 	// draw
-	for (size_t i = 0; i < models.size(); i++)
+	for (size_t i = 0; i < objects.size(); i++)
 	{
-		this->models[i]->Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
+		this->objects[i]->Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
 	}
 
 	this->swapchain->Present(1, NULL);
@@ -232,12 +232,16 @@ bool Graphics::InitScene()
 	this->cb_ps_pixelshader.data.eyePos = XMFLOAT4(0.0f, 0.0f, -2.0f, 0.0f);
 
 	// add models
-	Model *box = new Model();
-	if (!box->Initialize(this->device.Get(), this->deviceContext.Get(), L"Data\\Textures\\apiano.png", this->cb_vs_vertexshader))
+
+	// center box
+	Model *boxModel = new Model();
+	if (!boxModel->Initialize(this->device.Get(), this->deviceContext.Get(), L"Data\\Textures\\apiano.png", this->cb_vs_vertexshader))
 	{
 		return false;
 	}
-	models.push_back(box);
+	objects.push_back(boxModel);
+
+
 
 	// camera
 	camera.SetPosition(0.0f, 0.0f, -2.0f);

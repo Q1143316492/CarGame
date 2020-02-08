@@ -17,8 +17,7 @@ public:
 	void RenderFrame();
 
 	Camera camera;
-	std::vector<Model*>models;
-	Model model;
+	std::vector<Model*> objects;
 private:
 	bool InitDirectX(HWND hwnd);
 	bool InitShaders();

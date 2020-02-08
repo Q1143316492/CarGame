@@ -61,3 +61,5 @@ void GeometryFactory::CreateBox(Mesh &mesh, float lengthX, float lengthY, float 
 		mesh.SetIndexValue(i, indexs[i]);
 	}
 }
+
+

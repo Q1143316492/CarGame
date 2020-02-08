@@ -9,13 +9,12 @@ bool Model::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContex
 	this->deviceContext = deviceContext;
 	this->cb_vs_vertexshader = &cb_vs_vertexshader;
 
-	Mesh mesh;
-	GeometryFactory::CreateBox(mesh, 0.5f, 0.5f, 0.5f);
+	this->InitializeMesh(m_mesh);
 
-	hr = this->vertexBuffer.Initialize(this->device, mesh.GetVertexArrayAddressOf(), mesh.GetVertexSize());
+	hr = this->vertexBuffer.Initialize(this->device, m_mesh.GetVertexArrayAddressOf(), m_mesh.GetVertexSize());
 	HR_CHECKER1(hr, "Failed to initialize vertex buffer.");
 
-	hr = this->indexBuffer.Initialize(this->device, mesh.GetIndexArrayAddressOf(), mesh.GetIndexSize());
+	hr = this->indexBuffer.Initialize(this->device, m_mesh.GetIndexArrayAddressOf(), m_mesh.GetIndexSize());
 	HR_CHECKER1(hr, "Failed to initialize index buffer.");
 
 	this->SetPosition(0.0f, 0.0f, 0.0f);
@@ -43,6 +42,11 @@ void Model::Draw(const XMMATRIX & viewProjectionMatrix)
 	UINT offset = 0;
 	this->deviceContext->IASetVertexBuffers(0, 1, this->vertexBuffer.GetAddressOf(), this->vertexBuffer.StridePtr(), &offset);
 	this->deviceContext->DrawIndexed(this->indexBuffer.IndexCount(), 0, 0);
+}
+
+void Model::InitializeMesh(Mesh & mesh)
+{
+	GeometryFactory::CreateBox(mesh, 0.5f, 0.5f, 0.5f);
 }
 
 void Model::UpdateWorldMatrix()

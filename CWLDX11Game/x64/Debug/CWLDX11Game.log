@@ -1,9 +1,2 @@
-﻿  Engine.cpp
-  Graphics.cpp
-  Model.cpp
-  MainWindow.cpp
-  WindowContainer.cpp
-  main.cpp
-  正在生成代码...
-g:\0.workspace\dx11_learn\cargame\cwldx11game\engine.cpp(11): warning C4715: “Engine::Init”: 不是所有的控件路径都返回值
+﻿  Model.cpp
   CWLDX11Game.vcxproj -> G:\0.workspace\dx11_learn\CarGame\x64\Debug\CWLDX11Game.exe

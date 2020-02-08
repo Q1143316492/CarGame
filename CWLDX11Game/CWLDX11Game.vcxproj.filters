@@ -40,6 +40,12 @@
     <Filter Include="源文件\Util">
       <UniqueIdentifier>{9f9bd095-d4e8-45fc-9a96-3fb3564f7586}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\GameObject">
+      <UniqueIdentifier>{e7f8c872-25d0-43cc-b288-e4df33badebc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\GameObject">
+      <UniqueIdentifier>{e87482b6-83ff-4f3c-8313-64159a71c96a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">

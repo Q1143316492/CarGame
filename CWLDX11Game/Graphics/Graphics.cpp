@@ -40,8 +40,13 @@ void Graphics::RenderFrame()
 	this->deviceContext->VSSetShader(vertexshader.GetShader(), NULL, 0);
 	this->deviceContext->PSSetShader(pixelshader.GetShader(), NULL, 0);
 
+	// todo
+	//model.Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
 	// draw
-	this->model.Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
+	for (size_t i = 0; i < models.size(); i++)
+	{
+		this->models[i]->Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
+	}
 
 	this->swapchain->Present(1, NULL);
 }
@@ -91,26 +96,14 @@ bool Graphics::InitDirectX(HWND hwnd)
 		NULL,												 // Supported feature level
 		this->deviceContext.GetAddressOf());				 // Device Context Address
 
-	if (FAILED(hr))
-	{
-		ErrorLogger::Log(hr, "Failed to create device and swapchain.");
-		return false;
-	}
+	HR_CHECKER1(hr, "Failed to create device and swapchain.");
 
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
 	hr = this->swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(backBuffer.GetAddressOf()));
-	if (FAILED(hr))
-	{
-		ErrorLogger::Log(hr, "GetBuffer Failed.");
-		return false;
-	}
+	HR_CHECKER1(hr, "GetBuffer Failed.");
 
 	hr = this->device->CreateRenderTargetView(backBuffer.Get(), NULL, this->renderTargetView.GetAddressOf());
-	if (FAILED(hr))
-	{
-		ErrorLogger::Log(hr, "Failed to create render target view.");
-		return false;
-	}
+	HR_CHECKER1(hr, "Failed to create render target view.");
 
 	// Describe our Depth / Stencil Buffer
 	D3D11_TEXTURE2D_DESC depthStencilDesc;
@@ -127,18 +120,11 @@ bool Graphics::InitDirectX(HWND hwnd)
 	depthStencilDesc.MiscFlags = 0;
 
 	hr = this->device->CreateTexture2D(&depthStencilDesc, NULL, this->depthStencilBuffer.GetAddressOf());
-	if (FAILED(hr))
-	{
-		ErrorLogger::Log(hr, "Failed to create depth stencil buffer.");
-		return false;
-	}
+	HR_CHECKER1(hr, "Failed to create depth stencil buffer.");
 
 	hr = this->device->CreateDepthStencilView(this->depthStencilBuffer.Get(), NULL, this->depthStencilView.GetAddressOf());
-	if (FAILED(hr))
-	{
-		ErrorLogger::Log(hr, "Failed to create depth stencil view.");
-		return false;
-	}
+	HR_CHECKER1(hr, "Failed to create depth stencil view.");
+
 	this->deviceContext->OMSetRenderTargets(1, this->renderTargetView.GetAddressOf(), this->depthStencilView.Get());
 
 	// Create depth stencil state
@@ -149,11 +135,7 @@ bool Graphics::InitDirectX(HWND hwnd)
 	depthstencildesc.DepthFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_LESS_EQUAL;
 
 	hr = this->device->CreateDepthStencilState(&depthstencildesc, this->depthStencilState.GetAddressOf());
-	if (FAILED(hr))
-	{
-		ErrorLogger::Log(hr, "Failed to create depth stencil state.");
-		return false;
-	}
+	HR_CHECKER1(hr, "Failed to create depth stencil state.");
 
 	// Create the Viewport
 	D3D11_VIEWPORT viewport;
@@ -176,11 +158,7 @@ bool Graphics::InitDirectX(HWND hwnd)
 	rasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 	rasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
 	hr = this->device->CreateRasterizerState(&rasterizerDesc, this->rasterizerState.GetAddressOf());
-	if (FAILED(hr))
-	{
-		ErrorLogger::Log(hr, "Failed to create rasterizer state.");
-		return false;
-	}
+	HR_CHECKER1(hr, "Failed to create rasterizer state.")
 
 	// Create sampler description for sampler state
 	D3D11_SAMPLER_DESC sampDesc;
@@ -193,11 +171,7 @@ bool Graphics::InitDirectX(HWND hwnd)
 	sampDesc.MinLOD = 0;
 	sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
 	hr = device->CreateSamplerState(&sampDesc, this->samplerState.GetAddressOf());
-	if (FAILED(hr))
-	{
-		ErrorLogger::Log(hr, "Failed to create sampler state.");
-		return false;
-	}
+	HR_CHECKER1(hr, "Failed to create sampler state.");
 
 	return true;
 }
@@ -245,52 +219,25 @@ bool Graphics::InitShaders()
 bool Graphics::InitScene()
 {
 	HRESULT hr;
-	// load texture
-	//Texture boxTex;
-	//boxTex.InitTexture(this->device, L"Data\\Textures\\piano.png");
 
-	hr = DirectX::CreateWICTextureFromFile(device.Get(), L"Data\\Textures\\apiano.png", nullptr, myTexture.GetAddressOf());
-	if (FAILED(hr))
-	{
-		ErrorLogger::Log(hr, "Failed to create wic texture from file.");
-		return false;
-	}
-
-	// Initialize Constant Buffer(s)
 	hr = this->cb_vs_vertexshader.Initialize(this->device.Get(), this->deviceContext.Get());
-	if (FAILED(hr))
-	{
-		ErrorLogger::Log(hr, "Failed to initialize constant buffer.");
-		return false;
-	}
+	HR_CHECKER1(hr, "Failed to initialize vertexshader constant buffer.");
 
 	hr = this->cb_ps_pixelshader.Initialize(this->device.Get(), this->deviceContext.Get());
-	if (FAILED(hr))
-	{
-		ErrorLogger::Log(hr, "Failed to initialize constant buffer.");
-		return false;
-	}
+	HR_CHECKER1(hr, "Failed to initialize pixelshader constant buffer.");
 
 	// 光照
-	DirectionalLight m_DirLight;
-	m_DirLight.ambient = XMFLOAT4(0.2f, 0.2f, 0.2f, 1.0f);
-	m_DirLight.diffuse = XMFLOAT4(0.8f, 0.8f, 0.8f, 1.0f);
-	m_DirLight.specular = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
-	m_DirLight.direction = XMFLOAT3(-0.577f, -0.577f, 0.577f);
-
-	//// 初始化用于PS的常量缓冲区的值
-	this->cb_ps_pixelshader.data.material.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
-	this->cb_ps_pixelshader.data.material.diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	this->cb_ps_pixelshader.data.material.specular = XMFLOAT4(0.5f, 0.5f, 0.5f, 5.0f);
-	//// 使用默认平行光
-	this->cb_ps_pixelshader.data.dirLight = m_DirLight;
-	//// 注意不要忘记设置此处的观察位置，否则高亮部分会有问题
+	this->cb_ps_pixelshader.data.material = LightHelper::DefaultMaterial();
+	this->cb_ps_pixelshader.data.dirLight = LightHelper::DefaultDirectionalLight();
 	this->cb_ps_pixelshader.data.eyePos = XMFLOAT4(0.0f, 0.0f, -2.0f, 0.0f);
 
-
-	// model
-	if (!model.Initialize(this->device.Get(), this->deviceContext.Get(), myTexture.Get(), this->cb_vs_vertexshader))
+	// add models
+	Model *box = new Model();
+	if (!box->Initialize(this->device.Get(), this->deviceContext.Get(), L"Data\\Textures\\apiano.png", this->cb_vs_vertexshader))
+	{
 		return false;
+	}
+	models.push_back(box);
 
 	// camera
 	camera.SetPosition(0.0f, 0.0f, -2.0f);

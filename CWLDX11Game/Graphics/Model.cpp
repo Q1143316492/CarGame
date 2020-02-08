@@ -1,22 +1,22 @@
 #include "Model.h"
 
-bool Model::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, ID3D11ShaderResourceView * texture, ConstantBuffer<CB_VS_vertexshader>& cb_vs_vertexshader)
+bool Model::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, const wchar_t *texturePath, ConstantBuffer<CB_VS_vertexshader>& cb_vs_vertexshader)
 {
+	HRESULT hr = DirectX::CreateWICTextureFromFile(device, texturePath, nullptr, &this->texture);
+	HR_CHECKER1(hr, "Failed to create wic texture from file.");
+
 	this->device = device;
 	this->deviceContext = deviceContext;
-	this->texture = texture;
 	this->cb_vs_vertexshader = &cb_vs_vertexshader;
 
 	Mesh mesh;
 	GeometryFactory::CreateBox(mesh, 0.5f, 0.5f, 0.5f);
 
-	//Load Vertex Data
-	HRESULT hr = this->vertexBuffer.Initialize(this->device, mesh.GetVertexArrayAddressOf(), mesh.GetVertexSize());
-	HR(hr, "Failed to initialize vertex buffer.");
+	hr = this->vertexBuffer.Initialize(this->device, mesh.GetVertexArrayAddressOf(), mesh.GetVertexSize());
+	HR_CHECKER1(hr, "Failed to initialize vertex buffer.");
 
-	//Load Index Data
 	hr = this->indexBuffer.Initialize(this->device, mesh.GetIndexArrayAddressOf(), mesh.GetIndexSize());
-	HR(hr, "Failed to initialize index buffer.");
+	HR_CHECKER1(hr, "Failed to initialize index buffer.");
 
 	this->SetPosition(0.0f, 0.0f, 0.0f);
 	this->SetRotation(0.0f, 0.0f, 0.0f);
@@ -38,11 +38,11 @@ void Model::Draw(const XMMATRIX & viewProjectionMatrix)
 	this->cb_vs_vertexshader->ApplyChanges();
 	this->deviceContext->VSSetConstantBuffers(0, 1, this->cb_vs_vertexshader->GetAddressOf());
 
-	this->deviceContext->PSSetShaderResources(0, 1, &this->texture); //Set Texture
+	this->deviceContext->PSSetShaderResources(0, 1, &this->texture);
 	this->deviceContext->IASetIndexBuffer(this->indexBuffer.Get(), DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
 	UINT offset = 0;
 	this->deviceContext->IASetVertexBuffers(0, 1, this->vertexBuffer.GetAddressOf(), this->vertexBuffer.StridePtr(), &offset);
-	this->deviceContext->DrawIndexed(this->indexBuffer.IndexCount(), 0, 0); //Draw
+	this->deviceContext->DrawIndexed(this->indexBuffer.IndexCount(), 0, 0);
 }
 
 void Model::UpdateWorldMatrix()
@@ -165,20 +165,6 @@ void Model::AdjustRotation(float x, float y, float z)
 	this->rot.z += z;
 	this->rotVector = XMLoadFloat3(&this->rot);
 	this->UpdateWorldMatrix();
-}
-
-void Model::SetLookAtPos(XMFLOAT3 lookAtPos)
-{
-	XMFLOAT3 VectorLookAt = XMFLOAT3(lookAtPos.x - pos.x, lookAtPos.y - pos.y, lookAtPos.z - pos.z);
-	float pitch = 0.0f, yaw = 0.0f;
-	float dis = sqrt(VectorLookAt.x * VectorLookAt.x + VectorLookAt.z * VectorLookAt.z);
-	if (VectorLookAt.y != 0.0f && dis != 0) {
-		pitch = atan(VectorLookAt.y / sqrt(VectorLookAt.x * VectorLookAt.x + VectorLookAt.z * VectorLookAt.z));
-	}
-	if (VectorLookAt.x != 0.0f && VectorLookAt.z != 0) {
-		yaw = atan(VectorLookAt.x / VectorLookAt.z);
-	}
-	this->SetRotation(pitch, yaw, 0.0f);
 }
 
 const XMVECTOR & Model::GetForwardVector()

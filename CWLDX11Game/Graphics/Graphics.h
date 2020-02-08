@@ -1,11 +1,14 @@
 #pragma once
 
+#include <vector>
+
 #include "AdapterReader.h"
 #include "Shaders.h"
 #include "model.h"
 #include "ConstantBuffer.h"
 #include "Camera.h"
 #include "Texture.h"
+#include "LightHelper.h"
 
 class Graphics
 {
@@ -14,6 +17,7 @@ public:
 	void RenderFrame();
 
 	Camera camera;
+	std::vector<Model*>models;
 	Model model;
 private:
 	bool InitDirectX(HWND hwnd);
@@ -38,6 +42,5 @@ private:
 	int windowWidth = 0;
 	int windowHeight = 0;
 
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> myTexture;
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerState;
 };

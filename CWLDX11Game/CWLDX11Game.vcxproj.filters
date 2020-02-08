@@ -99,6 +99,9 @@
     <ClCompile Include="Util\StringConverter.cpp">
       <Filter>源文件\Util</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\LightHelper.cpp">
+      <Filter>源文件\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">

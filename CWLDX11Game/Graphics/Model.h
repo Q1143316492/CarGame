@@ -6,15 +6,18 @@
 #include "../Macro.h"
 #include "Mesh.h"
 #include "GeometryFactory.h"
+#include "Texture.h"
 
 using namespace DirectX;
 
 class Model
 {
 public:
-	bool Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, ID3D11ShaderResourceView * texture, ConstantBuffer<CB_VS_vertexshader> & cb_vs_vertexshader);
+	bool Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, const wchar_t *texturePath, ConstantBuffer<CB_VS_vertexshader> & cb_vs_vertexshader);
 	void SetTexture(ID3D11ShaderResourceView * texture);
 	void Draw(const XMMATRIX & viewProjectionMatrix);
+
+	
 
 	const XMVECTOR & GetPositionVector() const;
 	const XMFLOAT3 & GetPositionFloat3() const;
@@ -33,7 +36,7 @@ public:
 	void AdjustRotation(const XMVECTOR & rot);
 	void AdjustRotation(const XMFLOAT3 & rot);
 	void AdjustRotation(float x, float y, float z);
-	void SetLookAtPos(XMFLOAT3 lookAtPos);
+
 	const XMVECTOR & GetForwardVector();
 	const XMVECTOR & GetRightVector();
 	const XMVECTOR & GetBackwardVector();

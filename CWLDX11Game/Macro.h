@@ -1,6 +1,6 @@
 #pragma once
 
-#define HR(hr, str)												\
+#define HR_CHECKER1(hr, str)										\
 	if (FAILED(hr))												\
 	{															\
 		ErrorLogger::Log(hr, str);								\

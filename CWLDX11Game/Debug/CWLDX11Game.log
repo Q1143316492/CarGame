@@ -1,0 +1,7 @@
+﻿G:\0.workspace\dx11_learn\CarGame\CWLDX11Game\HLSL\pixelshader.hlsl(32,28-60): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see G:\0.workspace\dx11_learn\CarGame\Debug\pixelshader.cso
+G:\0.workspace\dx11_learn\CarGame\CWLDX11Game\HLSL\vertexshader.hlsl(27,2-77): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see G:\0.workspace\dx11_learn\CarGame\Debug\vertexshader.cso
+  Engine.cpp

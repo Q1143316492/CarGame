@@ -5,4 +5,11 @@
 	{															\
 		ErrorLogger::Log(hr, str);								\
 		return false;											\
-	}															
+	}					
+
+
+#define HR_CHECKER2(hr, str)										\
+	if (FAILED(hr))												\
+	{															\
+		ErrorLogger::Log(hr, str);								\
+	}	

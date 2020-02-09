@@ -41,7 +41,7 @@ void Engine::Update()
 		}
 	}
 
-	const float cameraSpeed = 0.05f;
+	const float cameraSpeed = 0.1f;
 
 	if (keyboard.KeyIsPressed('W'))
 	{

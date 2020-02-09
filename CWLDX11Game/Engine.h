@@ -1,6 +1,7 @@
 #pragma once
 
 #include "WindowContainer.h"
+#include "Macro.h"
 
 class Engine : WindowContainer
 {

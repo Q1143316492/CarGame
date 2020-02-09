@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include "Texture.h"
 #include "LightHelper.h"
+#include "../GameObject/SkyBox.h"
 
 class Graphics
 {
@@ -23,11 +24,12 @@ private:
 	bool InitShaders();
 	bool InitScene();
 
+public:
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext;
 	Microsoft::WRL::ComPtr<IDXGISwapChain> swapchain;
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTargetView;
-
+private:
 	VertexShader vertexshader;
 	PixelShader pixelshader;
 	ConstantBuffer<CB_VS_vertexshader> cb_vs_vertexshader;

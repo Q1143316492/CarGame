@@ -108,6 +108,9 @@
     <ClCompile Include="Graphics\LightHelper.cpp">
       <Filter>源文件\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\SkyBox.cpp">
+      <Filter>源文件\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="Util\StringConverter.h">
       <Filter>头文件\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\SkyBox.h">
+      <Filter>头文件\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

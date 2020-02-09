@@ -2,7 +2,9 @@
 
 bool Model::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, const wchar_t *texturePath, ConstantBuffer<CB_VS_vertexshader>& cb_vs_vertexshader)
 {
-	HRESULT hr = DirectX::CreateWICTextureFromFile(device, texturePath, nullptr, &this->texture);
+	HRESULT hr;
+	
+	hr = DirectX::CreateWICTextureFromFile(device, texturePath, nullptr, &this->texture);
 	HR_CHECKER1(hr, "Failed to create wic texture from file.");
 
 	this->device = device;

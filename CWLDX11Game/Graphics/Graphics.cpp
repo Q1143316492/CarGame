@@ -233,12 +233,25 @@ bool Graphics::InitScene()
 
 	// add models
 
+	SkyBox skyBox;
+	skyBox.Init(this->device.Get(), this->deviceContext.Get(), this->cb_vs_vertexshader, objects);
+
 	// center box
 	Model *boxModel = new Model();
 	if (!boxModel->Initialize(this->device.Get(), this->deviceContext.Get(), L"Data\\Textures\\apiano.png", this->cb_vs_vertexshader))
 	{
 		return false;
 	}
+	boxModel->AdjustPosition(0.0f, 0.25f, 0.0f);
+
+	/*if (keyboard.KeyIsPressed('E'))
+	{
+		ID3D11ShaderResourceView * texture = nullptr;
+		HRESULT hr = DirectX::CreateWICTextureFromFile(this->gfx.device.Get(), L"Data\\Textures\\piano.png", nullptr, &texture);
+		HR_CHECKER2(hr, "Failed to create wic texture from file.");
+		this->gfx.objects[0]->SetTexture(texture);
+	}
+*/
 	objects.push_back(boxModel);
 
 

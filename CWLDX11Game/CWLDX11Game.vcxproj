@@ -153,6 +153,7 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Mouse\MouseClass.cpp" />
     <ClCompile Include="Mouse\MouseEvent.cpp" />
+    <ClCompile Include="GameObject\SkyBox.cpp" />
     <ClCompile Include="Util\ErrorLogger.cpp" />
     <ClCompile Include="Util\StringConverter.cpp" />
     <ClCompile Include="WindowContainer.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Mouse\MouseClass.h" />
     <ClInclude Include="Mouse\MouseEvent.h" />
+    <ClInclude Include="GameObject\SkyBox.h" />
     <ClInclude Include="Util\ErrorLogger.h" />
     <ClInclude Include="Util\StringConverter.h" />
     <ClInclude Include="WindowContainer.h" />

@@ -12,6 +12,9 @@ public:
 	void SetVerTexValue(UINT index, const Vertex &value);
 	void SetIndexValue(UINT index, DWORD value);
 
+	Vertex GetVertex(INT index);
+	DWORD GetIndex(INT index);
+
 	Vertex * GetVertexArrayAddressOf();
 	DWORD * GetIndexArrayAddressOf();
 	UINT GetVertexSize();

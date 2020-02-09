@@ -237,12 +237,16 @@ bool Graphics::InitScene()
 	skyBox.Init(this->device.Get(), this->deviceContext.Get(), this->cb_vs_vertexshader, objects);
 
 	// center box
+
 	Model *boxModel = new Model();
-	if (!boxModel->Initialize(this->device.Get(), this->deviceContext.Get(), L"Data\\Textures\\apiano.png", this->cb_vs_vertexshader))
-	{
-		return false;
-	}
-	boxModel->AdjustPosition(0.0f, 0.25f, 0.0f);
+	INIT_MODEL1(!boxModel->Initialize(this->device, this->deviceContext, L"Data\\Textures\\metal.jpg", this->cb_vs_vertexshader));
+	boxModel->AdjustPosition(0.0f, 0.25f, 5.0f);
+	objects.push_back(boxModel);
+
+	car = new DefaultCar();
+	INIT_MODEL1(!car->Initialize(this->device, this->deviceContext, L"Data\\Textures\\metal.jpg", this->cb_vs_vertexshader));
+	car->AdjustPosition(0.0f, 0.25f, 0.0f);
+	objects.push_back(car);
 
 	/*if (keyboard.KeyIsPressed('E'))
 	{
@@ -252,12 +256,11 @@ bool Graphics::InitScene()
 		this->gfx.objects[0]->SetTexture(texture);
 	}
 */
-	objects.push_back(boxModel);
 
 
 
 	// camera
-	camera.SetPosition(0.0f, 0.0f, -2.0f);
+	camera.SetPosition(0.0f, 0.1f, -2.0f);
 	camera.SetProjectionValues(90.0f, static_cast<float>(windowWidth) / static_cast<float>(windowHeight), 0.1f, 1000.0f);
 
 	return true;

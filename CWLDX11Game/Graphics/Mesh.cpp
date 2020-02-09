@@ -36,6 +36,22 @@ void Mesh::SetIndexValue(UINT index, DWORD value)
 	}
 }
 
+Vertex Mesh::GetVertex(INT index)
+{
+	if (index >= 0 && index < this->GetVertexSize())
+	{
+		return this->m_vertexArray[index];
+	}
+}
+
+DWORD Mesh::GetIndex(INT index)
+{
+	if (index >= 0 && index < this->GetIndexSize())
+	{
+		return this->m_indexArray[index];
+	}
+}
+
 Vertex * Mesh::GetVertexArrayAddressOf()
 {
 	return this->m_vertexArray;

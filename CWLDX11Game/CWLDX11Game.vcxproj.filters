@@ -111,6 +111,9 @@
     <ClCompile Include="GameObject\SkyBox.cpp">
       <Filter>源文件\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\DefaultCar.cpp">
+      <Filter>源文件\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -186,6 +189,12 @@
       <Filter>头文件\Util</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\SkyBox.h">
+      <Filter>头文件\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\DefaultCar.h">
+      <Filter>头文件\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\GameObjects.h">
       <Filter>头文件\GameObject</Filter>
     </ClInclude>
   </ItemGroup>

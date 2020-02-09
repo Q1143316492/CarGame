@@ -80,19 +80,25 @@ void SkyBoxRight::InitializeMesh(Mesh & mesh)
 
 void SkyBoxBottom::InitializeMesh(Mesh & mesh)
 {
-	mesh.init(4, 6);
+	mesh.init(8, 12);
 	float w2 = SKY_BOX_LENGTH_X / 2, h2 = SKY_BOX_LENGTH_Y / 2, d2 = SKY_BOX_LENGTH_Z / 2;
 	Vertex v[] =
 	{
-		Vertex(-w2, -h2 + MOVE_UP_OFFSET, -d2,  0.0f, 1.0f,  0.0f, 1.0f, 0.0f),
-		Vertex(-w2, -h2 + MOVE_UP_OFFSET,  d2,  0.0f, 0.0f,  0.0f, 1.0f, 0.0f),
-		Vertex( w2, -h2 + MOVE_UP_OFFSET,  d2,  1.0f, 0.0f,  0.0f, 1.0f, 0.0f),
-		Vertex( w2, -h2 + MOVE_UP_OFFSET, -d2,  1.0f, 1.0f,  0.0f, 1.0f, 0.0f),
+		Vertex(-w2, -h2 + MOVE_UP_OFFSET, -d2,  0.0f, SKY_BOX_LENGTH_X,              0.0f, 1.0f, 0.0f),
+		Vertex(-w2, -h2 + MOVE_UP_OFFSET,  d2,  0.0f, 0.0f,                          0.0f, 1.0f, 0.0f),
+		Vertex( w2, -h2 + MOVE_UP_OFFSET,  d2,  SKY_BOX_LENGTH_X, 0.0f,              0.0f, 1.0f, 0.0f),
+		Vertex( w2, -h2 + MOVE_UP_OFFSET, -d2,  SKY_BOX_LENGTH_X, SKY_BOX_LENGTH_X,  0.0f, 1.0f, 0.0f),
+
+		Vertex(-w2, 0.0F, -d2,  0.0f, SKY_BOX_LENGTH_X,                              0.0f, 1.0f, 0.0f),
+		Vertex(-w2, 0.0F,  d2,  0.0f, 0.0f,                                          0.0f, 1.0f, 0.0f),
+		Vertex( w2, 0.0F,  d2,  SKY_BOX_LENGTH_X, 0.0f,                              0.0f, 1.0f, 0.0f),
+		Vertex( w2, 0.0F, -d2,  SKY_BOX_LENGTH_X, SKY_BOX_LENGTH_X,                  0.0f, 1.0f, 0.0f),
 	};
 
 	DWORD indexs[] =
 	{
-		0, 1, 2, 2, 3, 0
+		0, 1, 2, 2, 3, 0,
+		4, 5, 6, 6, 7, 4,
 	};
 	for (size_t i = 0; i < sizeof(v) / sizeof(Vertex); i++)
 	{
@@ -166,7 +172,7 @@ bool SkyBox::Init(ID3D11Device * device,
 		return false;
 	}
 	Model *skyboxbottom = new SkyBoxBottom();
-	if (!skyboxbottom->Initialize(device, deviceContext, L"Data\\Textures\\bottom.png", cb_vs_vertexshader))
+	if (!skyboxbottom->Initialize(device, deviceContext, L"Data\\Textures\\grass.jpg", cb_vs_vertexshader))
 	{
 		return false;
 	}

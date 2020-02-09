@@ -3,6 +3,9 @@
 #include "Keyboard/KeyboardClass.h"
 #include "Mouse/MouseClass.h"
 #include "Graphics/Graphics.h"
+#include "Util/ErrorLogger.h"
+
+#include <set>
 
 class WindowContainer
 {

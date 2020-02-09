@@ -13,7 +13,7 @@ using namespace DirectX;
 class Model
 {
 public:
-	bool Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, const wchar_t *texturePath, ConstantBuffer<CB_VS_vertexshader> & cb_vs_vertexshader);
+	bool Initialize(Microsoft::WRL::ComPtr<ID3D11Device> device, Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext, const wchar_t *texturePath, ConstantBuffer<CB_VS_vertexshader> & cb_vs_vertexshader);
 	void SetTexture(ID3D11ShaderResourceView * texture);
 	void Draw(const XMMATRIX & viewProjectionMatrix);
 	virtual void InitializeMesh(Mesh &mesh);
@@ -40,11 +40,16 @@ public:
 	const XMVECTOR & GetRightVector();
 	const XMVECTOR & GetBackwardVector();
 	const XMVECTOR & GetLeftVector();
+
+	virtual void MoveForward(float speed) {}
+	virtual void Movebackward(float speed) {}
+	virtual void TurnLeft(float speed) {}
+	virtual void TurnRight(float speed) {}
 private:
 	void UpdateWorldMatrix();
 
-	ID3D11Device * device = nullptr;
-	ID3D11DeviceContext * deviceContext = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11Device> device;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext;
 	ConstantBuffer<CB_VS_vertexshader> * cb_vs_vertexshader = nullptr;
 	ID3D11ShaderResourceView * texture = nullptr;
 

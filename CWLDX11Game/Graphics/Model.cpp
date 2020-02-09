@@ -1,10 +1,10 @@
 #include "Model.h"
 
-bool Model::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, const wchar_t *texturePath, ConstantBuffer<CB_VS_vertexshader>& cb_vs_vertexshader)
+bool Model::Initialize(Microsoft::WRL::ComPtr<ID3D11Device> device, Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext, const wchar_t *texturePath, ConstantBuffer<CB_VS_vertexshader>& cb_vs_vertexshader)
 {
 	HRESULT hr;
 	
-	hr = DirectX::CreateWICTextureFromFile(device, texturePath, nullptr, &this->texture);
+	hr = DirectX::CreateWICTextureFromFile(device.Get(), texturePath, nullptr, &this->texture);
 	HR_CHECKER1(hr, "Failed to create wic texture from file.");
 
 	this->device = device;
@@ -13,10 +13,10 @@ bool Model::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContex
 
 	this->InitializeMesh(m_mesh);
 
-	hr = this->vertexBuffer.Initialize(this->device, m_mesh.GetVertexArrayAddressOf(), m_mesh.GetVertexSize());
+	hr = this->vertexBuffer.Initialize(device.Get(), m_mesh.GetVertexArrayAddressOf(), m_mesh.GetVertexSize());
 	HR_CHECKER1(hr, "Failed to initialize vertex buffer.");
 
-	hr = this->indexBuffer.Initialize(this->device, m_mesh.GetIndexArrayAddressOf(), m_mesh.GetIndexSize());
+	hr = this->indexBuffer.Initialize(device.Get(), m_mesh.GetIndexArrayAddressOf(), m_mesh.GetIndexSize());
 	HR_CHECKER1(hr, "Failed to initialize index buffer.");
 
 	this->SetPosition(0.0f, 0.0f, 0.0f);

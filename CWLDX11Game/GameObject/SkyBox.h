@@ -6,7 +6,7 @@
 #define SKY_BOX_LENGTH_X 100.0F
 #define SKY_BOX_LENGTH_Y 100.0F
 #define SKY_BOX_LENGTH_Z 100.0F
-#define MOVE_UP_OFFSET (SKY_BOX_LENGTH_Y / 2.0F)
+#define MOVE_UP_OFFSET (SKY_BOX_LENGTH_Y / 3.0F)
 
 class SkyBoxTop : public Model
 {

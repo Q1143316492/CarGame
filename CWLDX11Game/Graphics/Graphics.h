@@ -9,7 +9,8 @@
 #include "Camera.h"
 #include "Texture.h"
 #include "LightHelper.h"
-#include "../GameObject/SkyBox.h"
+#include "../Macro.h"
+#include "../GameObject/GameObjects.h"
 
 class Graphics
 {
@@ -18,6 +19,7 @@ public:
 	void RenderFrame();
 
 	Camera camera;
+	Model *car;
 	std::vector<Model*> objects;
 private:
 	bool InitDirectX(HWND hwnd);

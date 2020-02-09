@@ -1,12 +1,3 @@
 ﻿  Engine.cpp
-  Camera.cpp
-g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\camera.cpp(133): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\camera.cpp(135): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\camera.cpp(138): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-  Graphics.cpp
-  MainWindow.cpp
-  WindowContainer.cpp
-  main.cpp
-  正在生成代码...
 g:\0.workspace\dx11_learn\cargame\cwldx11game\engine.cpp(11): warning C4715: “Engine::Init”: 不是所有的控件路径都返回值
   CWLDX11Game.vcxproj -> G:\0.workspace\dx11_learn\CarGame\x64\Debug\CWLDX11Game.exe

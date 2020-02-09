@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameObject\DefaultCar.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Graphics\AdapterReader.cpp" />
     <ClCompile Include="Graphics\Camera.cpp" />
@@ -159,6 +160,8 @@
     <ClCompile Include="WindowContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameObject\GameObjects.h" />
+    <ClInclude Include="GameObject\DefaultCar.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Graphics\AdapterReader.h" />
     <ClInclude Include="Graphics\Camera.h" />

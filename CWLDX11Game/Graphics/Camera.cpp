@@ -128,13 +128,18 @@ const XMVECTOR & Camera::GetLeftVector()
 
 void Camera::SetLookAtPos(XMFLOAT3 lookAtPos)
 {
-	XMFLOAT3 VectorLookAt = XMFLOAT3(lookAtPos.x - pos.x, lookAtPos.y - pos.y, lookAtPos.z - pos.z);
+	XMFLOAT3 VectorLookAt = XMFLOAT3(
+		fabs(lookAtPos.x - pos.x), 
+		fabs(lookAtPos.y - pos.y), 
+		fabs(lookAtPos.z - pos.z));
 	float pitch = 0.0f, yaw = 0.0f;
 	float dis = sqrt(VectorLookAt.x * VectorLookAt.x + VectorLookAt.z * VectorLookAt.z);
-	if (VectorLookAt.y != 0.0f && dis != 0) {
+	if (VectorLookAt.y != 0.0f && fabs(0.0f - dis) < 1e-6) 
+	{
 		pitch = atan(VectorLookAt.y / sqrt(VectorLookAt.x * VectorLookAt.x + VectorLookAt.z * VectorLookAt.z));
 	}
-	if (VectorLookAt.x != 0.0f && VectorLookAt.z != 0) {
+	if (VectorLookAt.x != 0.0f) 
+	{
 		yaw = atan(VectorLookAt.x / VectorLookAt.z);
 	}
 	this->SetRotation(pitch, yaw, 0.0f);

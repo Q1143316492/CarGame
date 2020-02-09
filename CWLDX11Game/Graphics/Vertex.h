@@ -9,6 +9,7 @@ struct Vertex
 		: pos(x, y, z), texCoord(u, v), normal(nx, ny, nz) {}
 
 	void SetPosition(float x, float y, float z);
+	void AdjustPosition(float x, float y, float z);
 	void SetTexCoord(float u, float v);
 	void SetNormal(float nx, float ny, float nz);
 

@@ -23,11 +23,32 @@ WindowContainer::WindowContainer()
 
 LRESULT WindowContainer::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	std::set<INT> noticeKeyCode;
+	noticeKeyCode.insert(VK_CONTROL);
+
 	switch (uMsg)
 	{
 		// keyboard
 		case WM_KEYDOWN:
 		{
+			if (noticeKeyCode.count(wParam) != 0)
+			{
+				unsigned char ch = static_cast<unsigned char>(wParam);
+				if (keyboard.IsCharsAutoRepeat())
+				{
+					keyboard.OnKeyPressed(ch);
+				}
+				else
+				{
+					const bool wasPressed = lParam & 0x40000000;
+					if (!wasPressed)
+					{
+						keyboard.OnKeyPressed(ch);
+					}
+				}
+				return 0;
+			}
+
 			unsigned char keycode = static_cast<unsigned char>(wParam);
 			if (keyboard.IsKeysAutoRepeat())
 			{

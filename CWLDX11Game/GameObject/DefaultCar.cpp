@@ -3,8 +3,12 @@
 void DefaultCar::InitializeMesh(Mesh & mesh)
 {
 	Mesh carBody, carHat;
-	GeometryFactory::CreateBox(carBody, 1.0F, 0.5F, 2.0F);
-	GeometryFactory::CreateBoxWithOffset(carHat, 1.0F * 0.75F, 0.5F * 0.75F, 2.0F * 0.5F, 0.0F, 0.4F, -0.1F);
+	static const float width = 0.5F;
+	static const float height = 0.25F;
+	static const float length = 1.0F;
+	GeometryFactory::CreateBox(carBody, width, height, length);
+	GeometryFactory::CreateBoxWithOffset(carHat, width * 0.75F, height * 0.75F, length * 0.5F, 
+		0.0F, height * 0.75F, -length / 10.0F);
 
 	UINT vertexSize = carBody.GetVertexSize() + carHat.GetVertexSize();
 	UINT indexSize = carBody.GetIndexSize() + carHat.GetIndexSize();

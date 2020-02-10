@@ -11,6 +11,7 @@
 #include "LightHelper.h"
 #include "../Macro.h"
 #include "../GameObject/GameObjects.h"
+#include "../GameObject/GameMapHelper.h"
 
 class Graphics
 {

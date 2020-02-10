@@ -21,7 +21,7 @@ SamplerState objSamplerState : SAMPLER: register(s0);
 float4 main(PS_INPUT input) : SV_TARGET
 {
 	float4 pixelColor = objTexture.Sample(objSamplerState, input.inTexCoord);
-	return pixelColor;
+
 	//float3 sampleColor = input.inNormal;
 	//float3 ambientLight = t_ambientLightColor * t_ambientLightStrength;
 	//float3 finalColor = sampleColor * ambientLight;

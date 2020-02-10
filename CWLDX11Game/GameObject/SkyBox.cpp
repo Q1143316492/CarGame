@@ -32,10 +32,14 @@ void SkyBoxLeft::InitializeMesh(Mesh & mesh)
 	float w2 = SKY_BOX_LENGTH_X / 2, h2 = SKY_BOX_LENGTH_Y / 2, d2 = SKY_BOX_LENGTH_Z / 2;
 	Vertex v[] =
 	{
-		Vertex(-w2, -h2 + MOVE_UP_OFFSET, -d2,  0.0f, 1.0f,     1.0f, 0.0f, 0.0f),
-		Vertex(-w2,  h2 + MOVE_UP_OFFSET, -d2,  0.0f, 0.0f,     1.0f, 0.0f, 0.0f),
-		Vertex(-w2,  h2 + MOVE_UP_OFFSET,  d2,  1.0f, 0.0f,     1.0f, 0.0f, 0.0f),
-		Vertex(-w2, -h2 + MOVE_UP_OFFSET,  d2,  1.0f, 1.0f,     1.0f, 0.0f, 0.0f),
+		//Vertex(-w2, -h2 + MOVE_UP_OFFSET, -d2,  0.0f, 1.0f,     1.0f, 0.0f, 0.0f),
+		//Vertex(-w2,  h2 + MOVE_UP_OFFSET, -d2,  0.0f, 0.0f,     1.0f, 0.0f, 0.0f),
+		//Vertex(-w2,  h2 + MOVE_UP_OFFSET,  d2,  1.0f, 0.0f,     1.0f, 0.0f, 0.0f),
+		//Vertex(-w2, -h2 + MOVE_UP_OFFSET,  d2,  1.0f, 1.0f,     1.0f, 0.0f, 0.0f),
+		Vertex(-w2, -h2 + MOVE_UP_OFFSET, -d2,  0.0f, 1.0f,     0.0f, 1.0f, 0.0f),
+		Vertex(-w2,  h2 + MOVE_UP_OFFSET, -d2,  0.0f, 0.0f,     0.0f, 1.0f, 0.0f),
+		Vertex(-w2,  h2 + MOVE_UP_OFFSET,  d2,  1.0f, 0.0f,     0.0f, 1.0f, 0.0f),
+		Vertex(-w2, -h2 + MOVE_UP_OFFSET,  d2,  1.0f, 1.0f,     0.0f, 1.0f, 0.0f),
 	};
 
 	DWORD indexs[] =
@@ -58,10 +62,14 @@ void SkyBoxRight::InitializeMesh(Mesh & mesh)
 	float w2 = SKY_BOX_LENGTH_X / 2, h2 = SKY_BOX_LENGTH_Y / 2, d2 = SKY_BOX_LENGTH_Z / 2;
 	Vertex v[] =
 	{
-		Vertex( w2, -h2 + MOVE_UP_OFFSET,  d2,  0.0f, 1.0f,  -1.0f, 0.0f, 0.0f),
-		Vertex( w2,  h2 + MOVE_UP_OFFSET,  d2,  0.0f, 0.0f,  -1.0f, 0.0f, 0.0f),
-		Vertex( w2,  h2 + MOVE_UP_OFFSET, -d2,  1.0f, 0.0f,  -1.0f, 0.0f, 0.0f),
-		Vertex( w2, -h2 + MOVE_UP_OFFSET, -d2,  1.0f, 1.0f,  -1.0f, 0.0f, 0.0f),
+		//Vertex( w2, -h2 + MOVE_UP_OFFSET,  d2,  0.0f, 1.0f,   -1.0f, 0.0f, 0.0f),
+		//Vertex( w2,  h2 + MOVE_UP_OFFSET,  d2,  0.0f, 0.0f,   -1.0f, 0.0f, 0.0f),
+		//Vertex( w2,  h2 + MOVE_UP_OFFSET, -d2,  1.0f, 0.0f,   -1.0f, 0.0f, 0.0f),
+		//Vertex( w2, -h2 + MOVE_UP_OFFSET, -d2,  1.0f, 1.0f,   -1.0f, 0.0f, 0.0f),
+		Vertex(w2, -h2 + MOVE_UP_OFFSET,  d2,  0.0f, 1.0f,   0.0f, 1.0f, 0.0f),
+		Vertex(w2,  h2 + MOVE_UP_OFFSET,  d2,  0.0f, 0.0f,   0.0f, 1.0f, 0.0f),
+		Vertex(w2,  h2 + MOVE_UP_OFFSET, -d2,  1.0f, 0.0f,   0.0f, 1.0f, 0.0f),
+		Vertex(w2, -h2 + MOVE_UP_OFFSET, -d2,  1.0f, 1.0f,   0.0f, 1.0f, 0.0f),
 	};
 
 	DWORD indexs[] =
@@ -116,10 +124,14 @@ void SkyBoxFront::InitializeMesh(Mesh & mesh)
 	float w2 = SKY_BOX_LENGTH_X / 2, h2 = SKY_BOX_LENGTH_Y / 2, d2 = SKY_BOX_LENGTH_Z / 2;
 	Vertex v[] =
 	{
-		Vertex(-w2, -h2 + MOVE_UP_OFFSET, d2,  0.0f, 1.0f,   0.0f, 0.0f, -1.0f),
-		Vertex(-w2,  h2 + MOVE_UP_OFFSET, d2,  0.0f, 0.0f,   0.0f, 0.0f, -1.0f),
-		Vertex( w2,  h2 + MOVE_UP_OFFSET, d2,  1.0f, 0.0f,   0.0f, 0.0f, -1.0f),
-		Vertex( w2, -h2 + MOVE_UP_OFFSET, d2,  1.0f, 1.0f,   0.0f, 0.0f, -1.0f),
+		//Vertex(-w2, -h2 + MOVE_UP_OFFSET, d2,  0.0f, 1.0f,   0.0f, 0.0f, -1.0f),
+		//Vertex(-w2,  h2 + MOVE_UP_OFFSET, d2,  0.0f, 0.0f,   0.0f, 0.0f, -1.0f),
+		//Vertex( w2,  h2 + MOVE_UP_OFFSET, d2,  1.0f, 0.0f,   0.0f, 0.0f, -1.0f),
+		//Vertex( w2, -h2 + MOVE_UP_OFFSET, d2,  1.0f, 1.0f,   0.0f, 0.0f, -1.0f),
+		Vertex(-w2, -h2 + MOVE_UP_OFFSET, d2,  0.0f, 1.0f,   0.0f, 1.0f, 0.0f),
+		Vertex(-w2,  h2 + MOVE_UP_OFFSET, d2,  0.0f, 0.0f,   0.0f, 1.0f, 0.0f),
+		Vertex( w2,  h2 + MOVE_UP_OFFSET, d2,  1.0f, 0.0f,   0.0f, 1.0f, 0.0f),
+		Vertex( w2, -h2 + MOVE_UP_OFFSET, d2,  1.0f, 1.0f,   0.0f, 1.0f, 0.0f),
 	};
 	DWORD indexs[] =
 	{
@@ -141,10 +153,14 @@ void SkyBoxBack::InitializeMesh(Mesh & mesh)
 	float w2 = SKY_BOX_LENGTH_X / 2, h2 = SKY_BOX_LENGTH_Y / 2, d2 = SKY_BOX_LENGTH_Z / 2;
 	Vertex v[] =
 	{
-		Vertex( w2, -h2 + MOVE_UP_OFFSET, -d2,  0.0f, 1.0f,   0.0f, 0.0f, 1.0f),
-		Vertex( w2,  h2 + MOVE_UP_OFFSET, -d2,  0.0f, 0.0f,   0.0f, 0.0f, 1.0f),
-		Vertex(-w2,  h2 + MOVE_UP_OFFSET, -d2,  1.0f, 0.0f,   0.0f, 0.0f, 1.0f),
-		Vertex(-w2, -h2 + MOVE_UP_OFFSET, -d2,  1.0f, 1.0f,   0.0f, 0.0f, 1.0f),
+		//Vertex( w2, -h2 + MOVE_UP_OFFSET, -d2,  0.0f, 1.0f,   0.0f, 0.0f, 1.0f),
+		//Vertex( w2,  h2 + MOVE_UP_OFFSET, -d2,  0.0f, 0.0f,   0.0f, 0.0f, 1.0f),
+		//Vertex(-w2,  h2 + MOVE_UP_OFFSET, -d2,  1.0f, 0.0f,   0.0f, 0.0f, 1.0f),
+		//Vertex(-w2, -h2 + MOVE_UP_OFFSET, -d2,  1.0f, 1.0f,   0.0f, 0.0f, 1.0f),
+		Vertex(w2, -h2 + MOVE_UP_OFFSET, -d2,  0.0f, 1.0f,   0.0f, 1.0f, 0.0f),
+		Vertex(w2,  h2 + MOVE_UP_OFFSET, -d2,  0.0f, 0.0f,   0.0f, 1.0f, 0.0f),
+		Vertex(-w2,  h2 + MOVE_UP_OFFSET, -d2,  1.0f, 0.0f,  0.0f, 1.0f, 0.0f),
+		Vertex(-w2, -h2 + MOVE_UP_OFFSET, -d2,  1.0f, 1.0f,  0.0f, 1.0f, 0.0f),
 	};
 
 	DWORD indexs[] =

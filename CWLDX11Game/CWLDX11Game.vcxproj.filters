@@ -114,6 +114,15 @@
     <ClCompile Include="GameObject\DefaultCar.cpp">
       <Filter>源文件\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\Box.cpp">
+      <Filter>源文件\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\GameMapHelper.cpp">
+      <Filter>源文件\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Cylinder.cpp">
+      <Filter>源文件\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -195,6 +204,15 @@
       <Filter>头文件\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\GameObjects.h">
+      <Filter>头文件\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Box.h">
+      <Filter>头文件\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\GameMapHelper.h">
+      <Filter>头文件\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Cylinder.h">
       <Filter>头文件\GameObject</Filter>
     </ClInclude>
   </ItemGroup>

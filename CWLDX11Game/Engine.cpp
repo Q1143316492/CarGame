@@ -30,12 +30,9 @@ void Engine::FirstPersonFredom()
 	while (!mouse.EventBufferIsEmpty())
 	{
 		MouseEvent me = mouse.ReadEvent();
-		if (mouse.IsRightDown())
+		if (me.GetType() == MouseEvent::EventType::RAW_MOVE)
 		{
-			if (me.GetType() == MouseEvent::EventType::RAW_MOVE)
-			{
-				this->gfx.camera.AdjustRotation((float)me.GetPosY() * 0.01f, (float)me.GetPosX() * 0.01f, 0);
-			}
+			this->gfx.camera.AdjustRotation((float)me.GetPosY() * 0.01f, (float)me.GetPosX() * 0.01f, 0);
 		}
 	}
 
@@ -134,12 +131,9 @@ void Engine::ThirePersonCamera()
 	while (!mouse.EventBufferIsEmpty())
 	{
 		MouseEvent me = mouse.ReadEvent();
-		if (mouse.IsRightDown())
+		if (me.GetType() == MouseEvent::EventType::RAW_MOVE)
 		{
-			if (me.GetType() == MouseEvent::EventType::RAW_MOVE)
-			{
-				this->gfx.camera.AdjustRotation((float)me.GetPosY() * 0.01f, (float)me.GetPosX() * 0.01f, 0);
-			}
+			this->gfx.camera.AdjustRotation((float)me.GetPosY() * 0.01f, (float)me.GetPosX() * 0.01f, 0);
 		}
 	}
 
@@ -153,12 +147,12 @@ void Engine::ThirePersonCamera()
 	}
 	if (keyboard.KeyIsPressed('A'))
 	{
-		this->gfx.car->MoveLeft(cameraSpeed);
+		//this->gfx.car->MoveLeft(cameraSpeed);
 		this->gfx.car->TurnLeft(cameraSpeed);
 	}
 	if (keyboard.KeyIsPressed('D'))
 	{
-		this->gfx.car->MoveRight(cameraSpeed);
+		//this->gfx.car->MoveRight(cameraSpeed);
 		this->gfx.car->TurnRight(cameraSpeed);
 	}
 

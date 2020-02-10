@@ -136,6 +136,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameObject\Cylinder.cpp" />
+    <ClCompile Include="GameObject\GameMapHelper.cpp" />
+    <ClCompile Include="GameObject\Box.cpp" />
     <ClCompile Include="GameObject\DefaultCar.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Graphics\AdapterReader.cpp" />
@@ -160,6 +163,9 @@
     <ClCompile Include="WindowContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameObject\Cylinder.h" />
+    <ClInclude Include="GameObject\GameMapHelper.h" />
+    <ClInclude Include="GameObject\Box.h" />
     <ClInclude Include="GameObject\GameObjects.h" />
     <ClInclude Include="GameObject\DefaultCar.h" />
     <ClInclude Include="Engine.h" />

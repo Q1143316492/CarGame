@@ -238,10 +238,8 @@ bool Graphics::InitScene()
 
 	// center box
 
-	Model *boxModel = new Model();
-	INIT_MODEL1(!boxModel->Initialize(this->device, this->deviceContext, L"Data\\Textures\\metal.jpg", this->cb_vs_vertexshader));
-	boxModel->AdjustPosition(0.0f, 0.25f, 5.0f);
-	objects.push_back(boxModel);
+	GameMapHelper::InitMaze(this->device, this->deviceContext, this->cb_vs_vertexshader, objects);
+	
 
 	car = new DefaultCar();
 	INIT_MODEL1(!car->Initialize(this->device, this->deviceContext, L"Data\\Textures\\metal.jpg", this->cb_vs_vertexshader));
@@ -255,9 +253,7 @@ bool Graphics::InitScene()
 		HR_CHECKER2(hr, "Failed to create wic texture from file.");
 		this->gfx.objects[0]->SetTexture(texture);
 	}
-*/
-
-
+	*/
 
 	// camera
 	camera.SetPosition(0.0f, 0.1f, -2.0f);

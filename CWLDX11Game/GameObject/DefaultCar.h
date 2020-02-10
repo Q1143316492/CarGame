@@ -8,7 +8,11 @@ public:
 	virtual void InitializeMesh(Mesh &mesh);
 
 	virtual void MoveForward(float speed);
-	virtual void Movebackward(float speed);	
+	virtual void Movebackward(float speed);
+
+	virtual void MoveLeft(float speed);
+	virtual void MoveRight(float speed);
+
 	virtual void TurnLeft(float speed);
 	virtual void TurnRight(float speed);
 };

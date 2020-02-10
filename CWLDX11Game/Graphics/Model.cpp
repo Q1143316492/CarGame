@@ -19,9 +19,7 @@ bool Model::Initialize(Microsoft::WRL::ComPtr<ID3D11Device> device, Microsoft::W
 	hr = this->indexBuffer.Initialize(device.Get(), m_mesh.GetIndexArrayAddressOf(), m_mesh.GetIndexSize());
 	HR_CHECKER1(hr, "Failed to initialize index buffer.");
 
-	this->SetPosition(0.0f, 0.0f, 0.0f);
-	this->SetRotation(0.0f, 0.0f, 0.0f);
-	this->UpdateWorldMatrix();
+	this->InitMatrix();
 	return true;
 }
 
@@ -191,4 +189,11 @@ const XMVECTOR & Model::GetBackwardVector()
 const XMVECTOR & Model::GetLeftVector()
 {
 	return this->vec_left;
+}
+
+void Model::InitMatrix()
+{
+	this->SetPosition(0.0f, 0.0f, 0.0f);
+	this->SetRotation(0.0f, 0.0f, 0.0f);
+	this->UpdateWorldMatrix();
 }

@@ -51,3 +51,15 @@ void DefaultCar::TurnRight(float speed)
 {
 	this->AdjustRotation(0.0F, speed, 0.0F);
 }
+
+void DefaultCar::MoveLeft(float speed)
+{
+	XMVECTOR vec = this->GetLeftVector() * speed;
+	this->AdjustPosition(vec);
+}
+
+void DefaultCar::MoveRight(float speed)
+{
+	XMVECTOR vec = this->GetRightVector() * speed;
+	this->AdjustPosition(vec);
+}

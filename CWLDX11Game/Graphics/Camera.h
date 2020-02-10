@@ -1,6 +1,9 @@
 #pragma once
 
 #include <DirectXMath.h>
+
+#include "../Macro.h"
+
 using namespace DirectX;
 
 class Camera
@@ -35,6 +38,16 @@ public:
 	const XMVECTOR & GetRightVector();
 	const XMVECTOR & GetBackwardVector();
 	const XMVECTOR & GetLeftVector();
+
+	void InitMatrix();
+
+	virtual void MoveForward(float speed);
+	virtual void Movebackward(float speed);
+	virtual void MoveLeft(float speed);
+	virtual void MoveRight(float speed);
+
+	void TurnLeft(float speed);
+	void TurnRight(float speed);
 
 private:
 	void UpdateViewMatrix();

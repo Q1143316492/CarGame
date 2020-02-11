@@ -12,6 +12,7 @@
 #include "../Macro.h"
 #include "../GameObject/GameObjects.h"
 #include "../GameObject/GameMapHelper.h"
+#include "../Util/MathTools.h"
 
 class Graphics
 {
@@ -20,7 +21,9 @@ public:
 	void RenderFrame();
 
 	Camera camera;
-	Model *car;
+	DefaultCar car;
+	Cylinder *tyres[4];
+	std::vector<Model*> collisionObjects;
 	std::vector<Model*> objects;
 private:
 	bool InitDirectX(HWND hwnd);

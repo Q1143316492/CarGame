@@ -5,6 +5,8 @@
 class DefaultCar : public Model
 {
 public:
+	DefaultCar();
+	
 	virtual void InitializeMesh(Mesh &mesh);
 
 	virtual void MoveForward(float speed);

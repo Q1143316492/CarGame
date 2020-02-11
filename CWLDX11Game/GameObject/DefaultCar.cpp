@@ -1,11 +1,21 @@
 #include "DefaultCar.h"
 
+DefaultCar::DefaultCar()
+{
+	SetCollisionType(CollisionType::COLLISION_TYPE_BOX);
+}
+
 void DefaultCar::InitializeMesh(Mesh & mesh)
 {
 	Mesh carBody, carHat;
 	static const float width = 0.5F;
 	static const float height = 0.25F;
 	static const float length = 1.0F;
+
+	this->m_LengthX = width;
+	this->m_LengthY = height;
+	this->m_LengthZ = length;
+
 	GeometryFactory::CreateBox(carBody, width, height, length);
 	GeometryFactory::CreateBoxWithOffset(carHat, width * 0.75F, height * 0.75F, length * 0.5F, 
 		0.0F, height * 0.75F, -length / 10.0F);

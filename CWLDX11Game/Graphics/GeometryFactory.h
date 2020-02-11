@@ -1,5 +1,8 @@
 #pragma once
 #include "Mesh.h"
+#include "../Util/MathTools.h"
+
+#include <vector>
 
 class GeometryFactory {
 public:
@@ -7,6 +10,8 @@ public:
 	static void CreateBoxWithOffset(Mesh &mesh, float lengthX, float lengthY, float lengthZ,
 		float offsetx = 0.0F, float offsety = 0.0F, float offsetz = 0.0F);
 
-	static void CreateDefaultCar(Mesh &mesh);
-};
+	static void CreateCylinder(Mesh & mesh, float radius, float height, float level);
 
+	static void Test(Mesh &mesh);
+
+};

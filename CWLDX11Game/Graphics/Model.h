@@ -10,9 +10,15 @@
 
 using namespace DirectX;
 
+enum class CollisionType {
+	COLLISION_TYPE_UNKNOW,
+	COLLISION_TYPE_BOX,
+};
+
 class Model
 {
 public:
+
 	bool Initialize(Microsoft::WRL::ComPtr<ID3D11Device> device, Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext, const wchar_t *texturePath, ConstantBuffer<CB_VS_vertexshader> & cb_vs_vertexshader);
 	void SetTexture(ID3D11ShaderResourceView * texture);
 	void Draw(const XMMATRIX & viewProjectionMatrix);
@@ -41,6 +47,13 @@ public:
 	const XMVECTOR & GetBackwardVector();
 	const XMVECTOR & GetLeftVector();
 
+	CollisionType GetCollisionType();
+	void SetCollisionType(CollisionType type);
+
+	virtual float GetCollisionWidthX() { return m_LengthX; }
+	virtual float GetCollisionWidthY() { return m_LengthY; }
+	virtual float GetCollisionWidthZ() { return m_LengthZ; }
+
 	virtual void InitMatrix();
 
 	virtual void MoveForward(float speed) {}
@@ -51,8 +64,14 @@ public:
 
 	virtual void TurnLeft(float speed) {}
 	virtual void TurnRight(float speed) {}
-private:
+
+protected:
 	void UpdateWorldMatrix();
+
+protected:
+	float m_LengthX = 0.0F;
+	float m_LengthY = 0.0F;
+	float m_LengthZ = 0.0F;
 
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext;
@@ -70,6 +89,8 @@ private:
 	XMFLOAT3 rot;
 
 	Mesh m_mesh;
+
+	CollisionType m_CollisionType = CollisionType::COLLISION_TYPE_UNKNOW;
 
 	const XMVECTOR DEFAULT_FORWARD_VECTOR = XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
 	const XMVECTOR DEFAULT_UP_VECTOR = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);

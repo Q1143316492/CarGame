@@ -126,10 +126,87 @@ void GeometryFactory::CreateBoxWithOffset(Mesh &mesh, float lengthX, float lengt
 	}
 }
 
-
-void GeometryFactory::CreateDefaultCar(Mesh & mesh)
+void GeometryFactory::CreateCylinder(Mesh & mesh, float radius, float height, float level)
 {
 
+	std::vector<Vertex> v;
+	std::vector<DWORD> indexs;
+
+	float offset = 360 / level;
+	float pindex = 0;
+
+	v.push_back(Vertex(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F));
+	pindex++;
+
+	for (int i = 0; i < 360; i += offset)
+	{
+		float x = radius * cos(MathTools::AngleChange(i));
+		float z = radius * sin(MathTools::AngleChange(i));
+
+		float nx = radius * cos(MathTools::AngleChange(i + offset));
+		float nz = radius * sin(MathTools::AngleChange(i + offset));
+		v.push_back(Vertex(nx, height / 2.0F, nz, 0.0F, 1.0F, 0.0F, 1.0F, 0.0F));	// [1] pindex - 4
+		v.push_back(Vertex(x, height / 2.0F, z, 1.0F, 0.0F, 0.0F, 1.0F, 0.0F));	    // [2] pindex - 3
+		indexs.push_back(0);
+		indexs.push_back(pindex++);
+		indexs.push_back(pindex++);
+
+		v.push_back(Vertex(x, -height / 2.0F, z, 1.0F, 0.0F, 0.0F, 1.0F, 0.0F));    // [4] pindex - 2
+		v.push_back(Vertex(nx, -height / 2.0F, nz, 0.0F, 1.0F, 0.0F, 1.0F, 0.0F));  // [3] pindex - 1
+		indexs.push_back(pindex++);
+		indexs.push_back(pindex++);
+		indexs.push_back(0);
+
+		// [4 2 1]
+		indexs.push_back(pindex - 2);
+		indexs.push_back(pindex - 3);
+		indexs.push_back(pindex - 4);
+
+		// [1 3 4]
+		indexs.push_back(pindex - 4);
+		indexs.push_back(pindex - 1);
+		indexs.push_back(pindex - 2);
+	}
+	mesh.init(v.size(), indexs.size());
+	for (size_t i = 0; i < v.size(); i++)
+	{
+		mesh.SetVerTexValue(i, v[i]);
+	}
+	for (size_t i = 0; i < indexs.size(); i++)
+	{
+		mesh.SetIndexValue(i, indexs[i]);
+	}
+
+}
+
+void GeometryFactory::Test(Mesh & mesh)
+{
+	mesh.init(3, 3);
+	float w2 = 5.0F / 2, h2 = 5.0F / 2, d2 = 5.0F / 2;
+
+	std::vector<Vertex> v;
+	//v.push_back(Vertex(w2, -h2, -d2, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f));
+	//v.push_back(Vertex(w2, h2, -d2, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f));
+	//v.push_back(Vertex(w2, h2, d2, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f));
+
+	v.push_back(Vertex(0.0F, 0.0F, 0.0F, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f));
+	v.push_back(Vertex(4.7F, 0.0F, 1.5F, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f));
+	v.push_back(Vertex(5.0F, 0.0F, 0.0F, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f));
+
+	std::vector<DWORD> indexs;
+	indexs.push_back(0);
+	indexs.push_back(1);
+	indexs.push_back(2);
+
+
+	for (size_t i = 0; i < v.size(); i++)
+	{
+		mesh.SetVerTexValue(i, v[i]);
+	}
+	for (size_t i = 0; i < indexs.size(); i++)
+	{
+		mesh.SetIndexValue(i, indexs[i]);
+	}
 }
 
 

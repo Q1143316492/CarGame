@@ -90,28 +90,47 @@ void Engine::FirstPersonCamera()
 		}
 	}
 
+	DefaultCar oldCar;
+	oldCar.SetPosition(this->gfx.car.GetPositionFloat3());
+	oldCar.SetRotation(this->gfx.car.GetRotationFloat3());
+
 	if (keyboard.KeyIsPressed('W'))
 	{
-		this->gfx.car->MoveForward(cameraSpeed);
-		this->gfx.camera.SetPosition(gfx.car->GetPositionVector());
+		this->gfx.car.MoveForward(cameraSpeed);
+		this->gfx.camera.SetPosition(gfx.car.GetPositionVector());
 		this->gfx.camera.AdjustPosition(0.0F, 1.0F, 0.0F);
 	}
 	if (keyboard.KeyIsPressed('S'))
 	{
-		this->gfx.car->Movebackward(cameraSpeed);
-		this->gfx.camera.SetPosition(gfx.car->GetPositionVector());
+		this->gfx.car.Movebackward(cameraSpeed);
+		this->gfx.camera.SetPosition(gfx.car.GetPositionVector());
 		this->gfx.camera.AdjustPosition(0.0F, 1.0F, 0.0F);
 	}
 	if (keyboard.KeyIsPressed('A'))
 	{
-		this->gfx.car->TurnLeft(0.1F); 
+		this->gfx.car.TurnLeft(0.1F); 
 		this->gfx.camera.AdjustRotation(0.0F, -0.1F, 0.0F);
 	}
 	if (keyboard.KeyIsPressed('D'))
 	{
-		this->gfx.car->TurnRight(0.1F);
+		this->gfx.car.TurnRight(0.1F);
 		this->gfx.camera.AdjustRotation(0.0F, 0.1F, 0.0F);
 	}
+
+	//bool crash = false;
+	//for (UINT i = 0; i < this->gfx.collisionObjects.size(); i++)
+	//{
+	//	if (CollisionDetection::CollisionDetectionModel(this->gfx.car, *this->gfx.collisionObjects[i]))
+	//	{
+	//		crash = true;
+	//		break;
+	//	}
+	//}
+	//if (crash)
+	//{
+	//	this->gfx.car.SetPosition(oldCar.GetPositionFloat3());
+	//	this->gfx.car.SetRotation(oldCar.GetRotationFloat3());
+	//}
 }
 
 void Engine::ThirePersonCamera()
@@ -139,26 +158,26 @@ void Engine::ThirePersonCamera()
 
 	if (keyboard.KeyIsPressed('W'))
 	{
-		this->gfx.car->MoveForward(cameraSpeed);
+		this->gfx.car.MoveForward(cameraSpeed);
 	}
 	if (keyboard.KeyIsPressed('S'))
 	{
-		this->gfx.car->Movebackward(cameraSpeed);
+		this->gfx.car.Movebackward(cameraSpeed);
 	}
 	if (keyboard.KeyIsPressed('A'))
 	{
 		//this->gfx.car->MoveLeft(cameraSpeed);
-		this->gfx.car->TurnLeft(cameraSpeed);
+		this->gfx.car.TurnLeft(cameraSpeed);
 	}
 	if (keyboard.KeyIsPressed('D'))
 	{
 		//this->gfx.car->MoveRight(cameraSpeed);
-		this->gfx.car->TurnRight(cameraSpeed);
+		this->gfx.car.TurnRight(cameraSpeed);
 	}
 
-	this->gfx.camera.SetPosition(this->gfx.car->GetPositionVector());
+	this->gfx.camera.SetPosition(this->gfx.car.GetPositionVector());
 	this->gfx.camera.AdjustPosition(0.0F, 2.0F, 0.0F);
-	this->gfx.camera.AdjustPosition(this->gfx.car->GetBackwardVector());
+	this->gfx.camera.AdjustPosition(this->gfx.car.GetBackwardVector());
 }
 
 void Engine::CheckGameState(unsigned char code)
@@ -173,9 +192,9 @@ void Engine::CheckGameState(unsigned char code)
 	{
 		gameState = GameState::FIRST_PERSON_CAMERA;
 		ErrorLogger::Log("first person");
-		this->gfx.car->InitMatrix();
+		this->gfx.car.InitMatrix();
 		this->gfx.camera.InitMatrix();
-		this->gfx.car->SetPosition(0.0F, 0.1F, 0.0F);
+		this->gfx.car.SetPosition(0.0F, 0.1F, 0.0F);
 		this->gfx.camera.SetPosition(0.0F, 1.0F, 0.0F);
 		this->gfx.camera.SetLookAtPos(0.0F, 0.0F, 0.5F);
 		return;
@@ -184,11 +203,11 @@ void Engine::CheckGameState(unsigned char code)
 	{
 		gameState = GameState::THIRE_PERSON_CAMERA;
 		ErrorLogger::Log("third person");
-		this->gfx.car->InitMatrix();
+		this->gfx.car.InitMatrix();
 		this->gfx.camera.InitMatrix();
-		this->gfx.car->SetPosition(0.0F, 0.1F, 0.0F);
+		this->gfx.car.SetPosition(0.0F, 0.1F, 0.0F);
 		this->gfx.camera.SetPosition(0.0F, 2.0F, -1.0F);
-		this->gfx.camera.SetLookAtPos(this->gfx.car->GetPositionFloat3());
+		this->gfx.camera.SetLookAtPos(this->gfx.car.GetPositionFloat3());
 		return;
 	}
 }

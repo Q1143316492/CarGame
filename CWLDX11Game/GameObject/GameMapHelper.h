@@ -17,7 +17,8 @@ public:
 	static bool InitMaze(Microsoft::WRL::ComPtr<ID3D11Device> device, 
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContex, 
 		ConstantBuffer<CB_VS_vertexshader>& cb_vs_vertexshader, 
-		std::vector<Model*> &objects);
+		std::vector<Model*> &objects, 
+		std::vector<Model*> &collisionObjects);
 
 private:
 	static void CreateMazeArray(int (*Map)[MazeWidth + 2], int Width);

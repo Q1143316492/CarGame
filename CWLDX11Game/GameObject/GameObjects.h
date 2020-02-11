@@ -4,3 +4,4 @@
 #include "SkyBox.h"
 #include "DefaultCar.h"
 #include "Box.h"
+#include "Cylinder.h"

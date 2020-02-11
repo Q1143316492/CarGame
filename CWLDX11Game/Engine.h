@@ -2,7 +2,8 @@
 
 #include "WindowContainer.h"
 #include "Macro.h"
-
+#include "GameObject/GameObjects.h"
+#include "Util/CollisionDetection.h"
 #include <iostream>
 
 class Engine : WindowContainer

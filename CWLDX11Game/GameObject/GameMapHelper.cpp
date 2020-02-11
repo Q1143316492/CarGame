@@ -1,7 +1,11 @@
 #include "GameMapHelper.h"
 
 
-bool GameMapHelper::InitMaze(Microsoft::WRL::ComPtr<ID3D11Device> device, Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext, ConstantBuffer<CB_VS_vertexshader>& cb_vs_vertexshader, std::vector<Model*>& objects)
+bool GameMapHelper::InitMaze(Microsoft::WRL::ComPtr<ID3D11Device> device, 
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext, 
+	ConstantBuffer<CB_VS_vertexshader>& cb_vs_vertexshader, 
+	std::vector<Model*>& objects,
+	std::vector<Model*> &collisionObjects)
 {
 	// todo 发现bug 动的时候法线没更新，导致光照有问题
 	//Box *box = new Box();
@@ -27,6 +31,7 @@ bool GameMapHelper::InitMaze(Microsoft::WRL::ComPtr<ID3D11Device> device, Micros
 				float PosZ = (offset - j) * BoxWidth;
 				box->SetPosition(PosX, BoxWidth / 2.0F, PosZ);
 				objects.push_back(box);
+				collisionObjects.push_back(box);
 			}
 		}
 	}

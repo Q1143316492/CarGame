@@ -191,6 +191,16 @@ const XMVECTOR & Model::GetLeftVector()
 	return this->vec_left;
 }
 
+CollisionType Model::GetCollisionType()
+{
+	return this->m_CollisionType;
+}
+
+void Model::SetCollisionType(CollisionType type)
+{
+	this->m_CollisionType = type;
+}
+
 void Model::InitMatrix()
 {
 	this->SetPosition(0.0f, 0.0f, 0.0f);

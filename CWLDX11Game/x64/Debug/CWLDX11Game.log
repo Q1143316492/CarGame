@@ -1,6 +1,14 @@
-﻿  GameMapHelper.cpp
+﻿  Engine.cpp
 g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.h(12): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
-g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.cpp(26): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
-g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.cpp(27): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
-g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.cpp(33): warning C4715: “GameMapHelper::InitMaze”: 不是所有的控件路径都返回值
+  Graphics.cpp
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.h(12): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+  MainWindow.cpp
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.h(12): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+  WindowContainer.cpp
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.h(12): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\windowcontainer.cpp(34): warning C4244: “参数”: 从“WPARAM”转换到“const int”，可能丢失数据
+  main.cpp
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.h(12): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+  正在生成代码...
+g:\0.workspace\dx11_learn\cargame\cwldx11game\engine.cpp(11): warning C4715: “Engine::Init”: 不是所有的控件路径都返回值
   CWLDX11Game.vcxproj -> G:\0.workspace\dx11_learn\CarGame\x64\Debug\CWLDX11Game.exe

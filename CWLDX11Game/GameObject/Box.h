@@ -5,10 +5,11 @@
 class Box : public Model
 {
 public:
+	Box();
+
 	virtual void InitializeMesh(Mesh &mesh);
 
 	void SetBoxLength(float Length);
-private:
-	float m_Length = 0.0F;
+
 };
 

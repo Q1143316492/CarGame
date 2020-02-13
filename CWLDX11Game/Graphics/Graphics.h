@@ -17,9 +17,12 @@
 class Graphics
 {
 public:
+	~Graphics();
 	bool Init(HWND hwnd, int width, int height);
 	void RenderFrame();
 
+public:
+	SkyBox sky;
 	Camera camera;
 	DefaultCar car;
 	Cylinder *tyres[4];

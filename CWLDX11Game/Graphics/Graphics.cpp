@@ -1,5 +1,10 @@
 #include "Graphics.h"
 
+Graphics::~Graphics()
+{
+
+}
+
 bool Graphics::Init(HWND hwnd, int width, int height)
 {
 	this->windowWidth = width;
@@ -232,12 +237,10 @@ bool Graphics::InitScene()
 	this->cb_ps_pixelshader.data.eyePos = XMFLOAT4(0.0f, 0.0f, -2.0f, 0.0f);
 
 	// add models
-
-	SkyBox skyBox;
-	skyBox.Init(this->device.Get(), this->deviceContext.Get(), this->cb_vs_vertexshader, objects);
+	sky.Init(this->device.Get(), this->deviceContext.Get(), this->cb_vs_vertexshader, objects);
 
 	// center box
-	 //GameMapHelper::InitMaze(this->device, this->deviceContext, this->cb_vs_vertexshader, objects, collisionObjects);
+	GameMapHelper::InitMaze(this->device, this->deviceContext, this->cb_vs_vertexshader, objects, collisionObjects);
 
 	//Box *box = new Box();
 	//box->SetBoxLength(BoxWidth);

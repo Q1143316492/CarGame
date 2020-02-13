@@ -33,7 +33,7 @@ void Model::Draw(const XMMATRIX & viewProjectionMatrix)
 	//Update Constant buffer with WVP Matrix
 	this->cb_vs_vertexshader->data.wvpMatrix = this->worldMatrix * viewProjectionMatrix;
 	this->cb_vs_vertexshader->data.wvpMatrix = XMMatrixTranspose(this->cb_vs_vertexshader->data.wvpMatrix);
-	this->cb_vs_vertexshader->data.worldMatrix = XMMatrixIdentity();
+	this->cb_vs_vertexshader->data.worldMatrix = this->worldMatrix;
 	this->cb_vs_vertexshader->ApplyChanges();
 	this->deviceContext->VSSetConstantBuffers(0, 1, this->cb_vs_vertexshader->GetAddressOf());
 
@@ -206,4 +206,8 @@ void Model::InitMatrix()
 	this->SetPosition(0.0f, 0.0f, 0.0f);
 	this->SetRotation(0.0f, 0.0f, 0.0f);
 	this->UpdateWorldMatrix();
+}
+
+void Model::GetCollisionDetection()
+{
 }

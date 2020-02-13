@@ -1,5 +1,14 @@
 #include "Camera.h"
 
+const float Camera::MIN_TPS_ANGLE = MathTools::AngleChange(30.0F);
+const float Camera::MAX_TPS_ANGLE = MathTools::AngleChange(-30.0F);
+
+const float Camera::MIN_TPS_LOOKATHEIGHT = 0.0f;
+const float Camera::MAX_TPS_LOOKATHEIGHT = 2.0f;
+
+const float Camera::MIN_TPS_DISTANCE = 1.0F;
+const float Camera::MAX_TPS_DISTANCE = 10.0F;
+
 Camera::Camera()
 {
 	this->InitMatrix();
@@ -155,19 +164,90 @@ void Camera::SetLookAtPos(float x, float y, float z)
 	this->SetLookAtPos(XMFLOAT3(x, y, z));
 }
 
+void Camera::SetCameraType(CameraType type)
+{
+	this->m_cameraType = type;
+}
+
 void Camera::UpdateViewMatrix()
 {
-	XMMATRIX camRotationMatrix = XMMatrixRotationRollPitchYaw(this->rot.x, this->rot.y, this->rot.z);
-	XMVECTOR camTarget = XMVector3TransformCoord(this->DEFAULT_FORWARD_VECTOR, camRotationMatrix);
-	XMVECTOR upDir = XMVector3TransformCoord(this->DEFAULT_UP_VECTOR, camRotationMatrix);
-	camTarget += this->posVector;	
-	this->viewMatrix = XMMatrixLookAtLH(this->posVector, camTarget, upDir);
+	if (m_cameraType == CameraType::FIRST_PERSON)
+	{
+		XMMATRIX camRotationMatrix = XMMatrixRotationRollPitchYaw(this->rot.x, this->rot.y, this->rot.z);
+		XMVECTOR camTarget = XMVector3TransformCoord(this->DEFAULT_FORWARD_VECTOR, camRotationMatrix);
+		XMVECTOR upDir = XMVector3TransformCoord(this->DEFAULT_UP_VECTOR, camRotationMatrix);
+		camTarget += this->posVector;
 
-	XMMATRIX vecRotationMatrix = XMMatrixRotationRollPitchYaw(0.0f, this->rot.y, 0.0f);
-	this->vec_forward = XMVector3TransformCoord(this->DEFAULT_FORWARD_VECTOR, vecRotationMatrix);
-	this->vec_backward = XMVector3TransformCoord(this->DEFAULT_BACKWARD_VECTOR, vecRotationMatrix);
-	this->vec_left = XMVector3TransformCoord(this->DEFAULT_LEFT_VECTOR, vecRotationMatrix);
-	this->vec_right = XMVector3TransformCoord(this->DEFAULT_RIGHT_VECTOR, vecRotationMatrix);
+		// 修改注视点的高度
+		XMFLOAT3 tmp;
+		DirectX::XMStoreFloat3(&tmp, camTarget);
+		tmp.y += this->m_tpsLookAtHeight;
+		camTarget = XMLoadFloat3(&tmp);
+
+		this->viewMatrix = XMMatrixLookAtLH(this->posVector, camTarget, upDir);
+		XMMATRIX vecRotationMatrix = XMMatrixRotationRollPitchYaw(0.0f, this->rot.y, 0.0f);
+	
+		this->vec_forward = XMVector3TransformCoord(this->DEFAULT_FORWARD_VECTOR, vecRotationMatrix);
+		this->vec_backward = XMVector3TransformCoord(this->DEFAULT_BACKWARD_VECTOR, vecRotationMatrix);
+		this->vec_left = XMVector3TransformCoord(this->DEFAULT_LEFT_VECTOR, vecRotationMatrix);
+		this->vec_right = XMVector3TransformCoord(this->DEFAULT_RIGHT_VECTOR, vecRotationMatrix);
+	}
+	else
+	{
+		XMMATRIX camRotationMatrix = XMMatrixRotationRollPitchYaw(this->rot.x, this->rot.y, this->rot.z);
+		XMVECTOR camTarget = this->posVector;
+		XMVECTOR upDir = XMVector3TransformCoord(this->DEFAULT_UP_VECTOR, camRotationMatrix);
+
+		XMMATRIX vecRotationMatrix = XMMatrixRotationRollPitchYaw(0.0f, this->rot.y, 0.0f);
+		this->vec_forward = XMVector3TransformCoord(this->DEFAULT_FORWARD_VECTOR, vecRotationMatrix);
+		this->vec_backward = XMVector3TransformCoord(this->DEFAULT_BACKWARD_VECTOR, vecRotationMatrix);
+		this->vec_left = XMVector3TransformCoord(this->DEFAULT_LEFT_VECTOR, vecRotationMatrix);
+		this->vec_right = XMVector3TransformCoord(this->DEFAULT_RIGHT_VECTOR, vecRotationMatrix);
+
+		/*
+					horizontalLength
+				___________  eyes
+			    |      .../
+		height	|   ../  dis
+			    |../
+			    goal
+		*/
+		float height = sin(this->m_tpsYaw) * m_tpsDistance;
+		float horizontalLength = cos(this->m_tpsYaw) * m_tpsDistance;
+		XMFLOAT3 tpsCameraPos, tmp;
+		XMVECTOR tmpVec;
+		DirectX::XMStoreFloat3(&tpsCameraPos, this->posVector);
+		tpsCameraPos.y += height;
+		DirectX::XMStoreFloat3(&tmp, this->vec_backward);
+		tpsCameraPos.x += tmp.x;
+		tpsCameraPos.z += tmp.z;
+		
+		tmp = XMFLOAT3(0.0F, m_tpsLookAtHeight, 0.0F);
+		tmpVec = XMLoadFloat3(&tmp);
+		camTarget += this->vec_forward;
+		camTarget += tmpVec;
+		this->viewMatrix = XMMatrixLookAtLH(XMLoadFloat3(&tpsCameraPos), camTarget, upDir);
+	}
+}
+
+void Camera::AdjustThirdPersonAngle(float angle)
+{
+	// todo
+	this->m_tpsYaw += angle;
+}
+
+void Camera::AdjustThirdPersonDistance(float distance)
+{
+	this->m_tpsDistance += distance;
+	this->m_tpsDistance = std::fmin(m_tpsDistance, Camera::MAX_TPS_DISTANCE);
+	this->m_tpsDistance = std::fmax(m_tpsDistance, Camera::MIN_TPS_DISTANCE);
+}
+
+void Camera::AdjustThirdPersonLookAtHeight(float height)
+{
+	this->m_tpsLookAtHeight -= height;
+	this->m_tpsLookAtHeight = std::fmin(m_tpsLookAtHeight, Camera::MAX_TPS_LOOKATHEIGHT);
+	this->m_tpsLookAtHeight = std::fmax(m_tpsLookAtHeight, Camera::MIN_TPS_LOOKATHEIGHT);
 }
 
 void Camera::MoveForward(float speed)

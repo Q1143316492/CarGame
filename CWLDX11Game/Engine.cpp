@@ -81,12 +81,10 @@ void Engine::FirstPersonCamera()
 	while (!mouse.EventBufferIsEmpty())
 	{
 		MouseEvent me = mouse.ReadEvent();
-		if (mouse.IsRightDown())
+		if (me.GetType() == MouseEvent::EventType::RAW_MOVE)
 		{
-			if (me.GetType() == MouseEvent::EventType::RAW_MOVE)
-			{
-				this->gfx.camera.AdjustRotation((float)me.GetPosY() * 0.01f, (float)me.GetPosX() * 0.01f, 0);
-			}
+			//this->gfx.camera.AdjustRotation(0.0F, (float)me.GetPosX() * 0.01f, 0);
+			this->gfx.camera.AdjustThirdPersonLookAtHeight((float)me.GetPosY() * 0.01f);
 		}
 	}
 
@@ -117,6 +115,7 @@ void Engine::FirstPersonCamera()
 		this->gfx.camera.AdjustRotation(0.0F, 0.1F, 0.0F);
 	}
 
+	this->gfx.sky.MoveSkyBox(&this->gfx.car);
 	//bool crash = false;
 	//for (UINT i = 0; i < this->gfx.collisionObjects.size(); i++)
 	//{
@@ -136,6 +135,8 @@ void Engine::FirstPersonCamera()
 void Engine::ThirePersonCamera()
 {
 	const float cameraSpeed = 0.1f;
+	static float disCamera = 2.0F;
+	static float rot = 0.0F;
 
 	while (!keyboard.CharBufferIsEmpty())
 	{
@@ -152,7 +153,16 @@ void Engine::ThirePersonCamera()
 		MouseEvent me = mouse.ReadEvent();
 		if (me.GetType() == MouseEvent::EventType::RAW_MOVE)
 		{
-			this->gfx.camera.AdjustRotation((float)me.GetPosY() * 0.01f, (float)me.GetPosX() * 0.01f, 0);
+			this->gfx.camera.AdjustRotation(0, (float)me.GetPosX() * 0.01f, 0);
+			this->gfx.camera.AdjustThirdPersonLookAtHeight((float)me.GetPosY() * 0.01f);
+		}
+		if (me.GetType() == MouseEvent::EventType::WheelUp)
+		{
+			this->gfx.camera.AdjustThirdPersonDistance(-0.1F);
+		}
+		if (me.GetType() == MouseEvent::EventType::WheelDown)
+		{
+			this->gfx.camera.AdjustThirdPersonDistance(0.1F);
 		}
 	}
 
@@ -166,18 +176,14 @@ void Engine::ThirePersonCamera()
 	}
 	if (keyboard.KeyIsPressed('A'))
 	{
-		//this->gfx.car->MoveLeft(cameraSpeed);
 		this->gfx.car.TurnLeft(cameraSpeed);
 	}
 	if (keyboard.KeyIsPressed('D'))
 	{
-		//this->gfx.car->MoveRight(cameraSpeed);
 		this->gfx.car.TurnRight(cameraSpeed);
 	}
-
 	this->gfx.camera.SetPosition(this->gfx.car.GetPositionVector());
-	this->gfx.camera.AdjustPosition(0.0F, 2.0F, 0.0F);
-	this->gfx.camera.AdjustPosition(this->gfx.car.GetBackwardVector());
+	this->gfx.sky.MoveSkyBox(&this->gfx.car);
 }
 
 void Engine::CheckGameState(unsigned char code)
@@ -185,28 +191,32 @@ void Engine::CheckGameState(unsigned char code)
 	if (code == 0x31)
 	{
 		gameState = GameState::FIRST_PERSON_FREDOM;
+		this->gfx.camera.SetCameraType(Camera::CameraType::FIRST_PERSON);
 		ErrorLogger::Log("fredom");
 		return;
 	}
 	if (code == 0x32)
 	{
 		gameState = GameState::FIRST_PERSON_CAMERA;
+		this->gfx.camera.SetCameraType(Camera::CameraType::FIRST_PERSON);
 		ErrorLogger::Log("first person");
 		this->gfx.car.InitMatrix();
 		this->gfx.camera.InitMatrix();
-		this->gfx.car.SetPosition(0.0F, 0.1F, 0.0F);
-		this->gfx.camera.SetPosition(0.0F, 1.0F, 0.0F);
-		this->gfx.camera.SetLookAtPos(0.0F, 0.0F, 0.5F);
+		this->gfx.car.SetPosition(0.0F, 0.1F, 0.0F);		
+		this->gfx.camera.SetPosition(gfx.car.GetPositionVector());
+		this->gfx.camera.AdjustPosition(0.0F, 2.0F, 0.0F);
+		this->gfx.camera.SetLookAtPos(gfx.car.GetPositionFloat3());
 		return;
 	}
 	if (code == 0x33)
 	{
 		gameState = GameState::THIRE_PERSON_CAMERA;
+		this->gfx.camera.SetCameraType(Camera::CameraType::THIRD_PERSON);
 		ErrorLogger::Log("third person");
 		this->gfx.car.InitMatrix();
 		this->gfx.camera.InitMatrix();
 		this->gfx.car.SetPosition(0.0F, 0.1F, 0.0F);
-		this->gfx.camera.SetPosition(0.0F, 2.0F, -1.0F);
+		this->gfx.camera.SetPosition(0.0F, 2.0F, 0.0F);
 		this->gfx.camera.SetLookAtPos(this->gfx.car.GetPositionFloat3());
 		return;
 	}

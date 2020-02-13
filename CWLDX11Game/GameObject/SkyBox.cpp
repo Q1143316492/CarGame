@@ -182,32 +182,32 @@ bool SkyBox::Init(ID3D11Device * device,
 	ConstantBuffer<CB_VS_vertexshader>& cb_vs_vertexshader,
 	std::vector<Model*> &objects)
 {
-	Model *skyboxtop = new SkyBoxTop();
+	skyboxtop = new SkyBoxTop();
 	if (!skyboxtop->Initialize(device, deviceContext, L"Data\\Textures\\top.png", cb_vs_vertexshader))
 	{
 		return false;
 	}
-	Model *skyboxbottom = new SkyBoxBottom();
+	skyboxbottom = new SkyBoxBottom();
 	if (!skyboxbottom->Initialize(device, deviceContext, L"Data\\Textures\\grass.jpg", cb_vs_vertexshader))
 	{
 		return false;
 	}
-	Model *skyboxleft = new SkyBoxLeft();
+	skyboxleft = new SkyBoxLeft();
 	if (!skyboxleft->Initialize(device, deviceContext, L"Data\\Textures\\left.png", cb_vs_vertexshader))
 	{
 		return false;
 	}
-	Model *skyboxright = new SkyBoxRight();
+	skyboxright = new SkyBoxRight();
 	if (!skyboxright->Initialize(device, deviceContext, L"Data\\Textures\\right.png", cb_vs_vertexshader))
 	{
 		return false;
 	}
-	Model *skyboxfront = new SkyBoxFront();
+	skyboxfront = new SkyBoxFront();
 	if (!skyboxfront->Initialize(device, deviceContext, L"Data\\Textures\\front.png", cb_vs_vertexshader))
 	{
 		return false;
 	}
-	Model *skyboxback = new SkyBoxBack();
+	skyboxback = new SkyBoxBack();
 	if (!skyboxback->Initialize(device, deviceContext, L"Data\\Textures\\back.png", cb_vs_vertexshader))
 	{
 		return false;
@@ -219,4 +219,15 @@ bool SkyBox::Init(ID3D11Device * device,
 	objects.push_back(skyboxfront);
 	objects.push_back(skyboxback);
 	return true;
+}
+
+void SkyBox::MoveSkyBox(Model * player)
+{
+	XMFLOAT3 pos = player->GetPositionFloat3();
+	skyboxtop->SetPosition(pos.x, 0.0F, pos.z);
+	skyboxleft->SetPosition(pos.x, 0.0F, pos.z);
+	skyboxright->SetPosition(pos.x, 0.0F, pos.z);
+	skyboxfront->SetPosition(pos.x, 0.0F, pos.z);
+	skyboxback->SetPosition(pos.x, 0.0F, pos.z);
+	// skyboxbottom->SetPosition(pos.x, 0.0F, pos.z);
 }

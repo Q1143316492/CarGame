@@ -56,6 +56,8 @@ public:
 
 	virtual void InitMatrix();
 
+	virtual void GetCollisionDetection();
+
 	virtual void MoveForward(float speed) {}
 	virtual void Movebackward(float speed) {}
 

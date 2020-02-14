@@ -47,6 +47,11 @@ public:
 	const XMVECTOR & GetBackwardVector();
 	const XMVECTOR & GetLeftVector();
 
+	const XMFLOAT3 & GetForwardFloat3();
+	const XMFLOAT3 & GetRightFloat3();
+	const XMFLOAT3 & GetBackwardFloat3();
+	const XMFLOAT3 & GetLeftFloat3();
+
 	CollisionType GetCollisionType();
 	void SetCollisionType(CollisionType type);
 

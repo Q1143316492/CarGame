@@ -3,7 +3,6 @@
 #include "WindowContainer.h"
 #include "Macro.h"
 #include "GameObject/GameObjects.h"
-#include "Util/CollisionDetection.h"
 #include <iostream>
 
 class Engine : WindowContainer
@@ -21,7 +20,7 @@ public:
 	void FirstPersonFredom();
 	void FirstPersonCamera();
 	void ThirePersonCamera();
-	void CheckGameState(unsigned char code);
+	bool CheckGameState(unsigned char code);
 
 	void Update();
 

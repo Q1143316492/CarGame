@@ -17,5 +17,8 @@ public:
 
 	virtual void TurnLeft(float speed);
 	virtual void TurnRight(float speed);
+
+	void CalculateTyresPosition(std::vector<XMFLOAT3> &vecPosition); 
+	void CalculateTyresRotation(std::vector<XMFLOAT3> &vecRotation, float tyreRotForward, float tyreRot);
 };
 

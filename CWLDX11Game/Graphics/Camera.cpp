@@ -1,10 +1,13 @@
 #include "Camera.h"
 
-const float Camera::MIN_TPS_ANGLE = MathTools::AngleChange(30.0F);
-const float Camera::MAX_TPS_ANGLE = MathTools::AngleChange(-30.0F);
+const float Camera::MAX_TPS_ANGLE = MathTools::AngleChange(30.0F);
+const float Camera::MIN_TPS_ANGLE = MathTools::AngleChange(-30.0F);
 
 const float Camera::MIN_TPS_LOOKATHEIGHT = 0.0f;
 const float Camera::MAX_TPS_LOOKATHEIGHT = 2.0f;
+
+const float Camera::MAX_FPS_LOOKATHEIGHT = 30.0F;
+const float Camera::MIN_FPS_LOOKATHEIGHT = -30.0F;
 
 const float Camera::MIN_TPS_DISTANCE = 1.0F;
 const float Camera::MAX_TPS_DISTANCE = 10.0F;
@@ -179,10 +182,10 @@ void Camera::UpdateViewMatrix()
 		camTarget += this->posVector;
 
 		// 修改注视点的高度
-		XMFLOAT3 tmp;
+		/*XMFLOAT3 tmp;
 		DirectX::XMStoreFloat3(&tmp, camTarget);
 		tmp.y += this->m_tpsLookAtHeight;
-		camTarget = XMLoadFloat3(&tmp);
+		camTarget = XMLoadFloat3(&tmp);*/
 
 		this->viewMatrix = XMMatrixLookAtLH(this->posVector, camTarget, upDir);
 		XMMATRIX vecRotationMatrix = XMMatrixRotationRollPitchYaw(0.0f, this->rot.y, 0.0f);
@@ -241,6 +244,17 @@ void Camera::AdjustThirdPersonDistance(float distance)
 	this->m_tpsDistance += distance;
 	this->m_tpsDistance = std::fmin(m_tpsDistance, Camera::MAX_TPS_DISTANCE);
 	this->m_tpsDistance = std::fmax(m_tpsDistance, Camera::MIN_TPS_DISTANCE);
+}
+
+void Camera::AdjustFirstPersonLookAtHeight(float height)
+{
+	this->rot.x = this->rot.x  + height;
+	static float mx = 0;
+	static float mi = 0;
+
+	this->rot.x = std::fmin(this->rot.x, 1.0F);
+	this->rot.x = std::fmax(this->rot.x, -1.0F);
+	this->SetRotation(this->rot.x, this->rot.y, this->rot.z);
 }
 
 void Camera::AdjustThirdPersonLookAtHeight(float height)

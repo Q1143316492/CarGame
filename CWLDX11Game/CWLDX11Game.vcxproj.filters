@@ -123,9 +123,6 @@
     <ClCompile Include="GameObject\Cylinder.cpp">
       <Filter>源文件\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Util\CollisionDetection.cpp">
-      <Filter>源文件\Util</Filter>
-    </ClCompile>
     <ClCompile Include="Util\MathTools.cpp">
       <Filter>源文件\Util</Filter>
     </ClCompile>
@@ -220,9 +217,6 @@
     </ClInclude>
     <ClInclude Include="GameObject\Cylinder.h">
       <Filter>头文件\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\CollisionDetection.h">
-      <Filter>头文件\Util</Filter>
     </ClInclude>
     <ClInclude Include="Util\MathTools.h">
       <Filter>头文件\Util</Filter>

@@ -137,7 +137,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Util\MathTools.cpp" />
-    <ClCompile Include="Util\CollisionDetection.cpp" />
     <ClCompile Include="GameObject\Cylinder.cpp" />
     <ClCompile Include="GameObject\GameMapHelper.cpp" />
     <ClCompile Include="GameObject\Box.cpp" />
@@ -166,7 +165,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Util\MathTools.h" />
-    <ClInclude Include="Util\CollisionDetection.h" />
     <ClInclude Include="GameObject\Cylinder.h" />
     <ClInclude Include="GameObject\GameMapHelper.h" />
     <ClInclude Include="GameObject\Box.h" />

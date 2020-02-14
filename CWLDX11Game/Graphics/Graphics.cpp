@@ -236,22 +236,13 @@ bool Graphics::InitScene()
 	this->cb_ps_pixelshader.data.dirLight = LightHelper::DefaultDirectionalLight();
 	this->cb_ps_pixelshader.data.eyePos = XMFLOAT4(0.0f, 0.0f, -2.0f, 0.0f);
 
-	// add models
+	// 模型
+	
 	sky.Init(this->device.Get(), this->deviceContext.Get(), this->cb_vs_vertexshader, objects);
-
-	// center box
+	
 	GameMapHelper::InitMaze(this->device, this->deviceContext, this->cb_vs_vertexshader, objects, collisionObjects);
 
-	//Box *box = new Box();
-	//box->SetBoxLength(BoxWidth);
-	//INIT_MODEL1(!box->Initialize(device, deviceContext, L"Data\\Textures\\wooden.jpg", cb_vs_vertexshader));
-
-	//box->SetPosition(0.0F, 0.0F, 0.0F);
-	//objects.push_back(box);
-	//collisionObjects.push_back(box);
-
 	INIT_MODEL1(!car.Initialize(this->device, this->deviceContext, L"Data\\Textures\\metal.jpg", this->cb_vs_vertexshader));
-	car.AdjustPosition(0.0f, 0.25f, 0.0f);
 	objects.push_back(&car);
 
 	for (int i = 0; i < 4; i++)
@@ -261,15 +252,9 @@ bool Graphics::InitScene()
 		tyres[i]->SetHeight(0.1F);
 		tyres[i]->SetLevel(20);
 		INIT_MODEL1(!tyres[i]->Initialize(this->device, this->deviceContext, L"Data\\Textures\\tyre.png", this->cb_vs_vertexshader));
-		tyres[i]->SetPosition(car.GetPositionFloat3());
-		tyres[i]->AdjustRotation(0.0f, 0.0F, MathTools::AngleChange(90.0F));
 		objects.push_back(tyres[i]);
 	}
-	tyres[0]->AdjustPosition(-car.GetCollisionWidthX() / 2.0f, 0.0F,  car.GetCollisionWidthZ() / 3.0f);
-	tyres[1]->AdjustPosition( car.GetCollisionWidthX() / 2.0f, 0.0F,  car.GetCollisionWidthZ() / 3.0f);
-	tyres[2]->AdjustPosition(-car.GetCollisionWidthX() / 2.0f, 0.0F, -car.GetCollisionWidthZ() / 3.0f);
-	tyres[3]->AdjustPosition( car.GetCollisionWidthX() / 2.0f, 0.0F, -car.GetCollisionWidthZ() / 3.0f);
-
+	
 	// 中途换材质
 	/*
 		ID3D11ShaderResourceView * texture = nullptr;
@@ -279,7 +264,7 @@ bool Graphics::InitScene()
 	*/
 
 	// camera
-	camera.SetPosition(0.0f, 0.1f, -2.0f);
+	camera.SetPosition(this->car.GetPositionVector());
 	camera.SetProjectionValues(90.0f, static_cast<float>(windowWidth) / static_cast<float>(windowHeight), 0.1f, 1000.0f);
 
 	return true;

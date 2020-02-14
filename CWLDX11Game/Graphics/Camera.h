@@ -59,7 +59,8 @@ public:
 
 	void AdjustThirdPersonAngle(float angle);
 	void AdjustThirdPersonDistance(float distance);
-	void AdjustThirdPersonLookAtHeight(float height);
+	void AdjustThirdPersonLookAtHeight(float height); 
+	void AdjustFirstPersonLookAtHeight(float height);
 private:
 	void UpdateViewMatrix();
 
@@ -94,10 +95,13 @@ private:
 	
 	static const float MAX_TPS_DISTANCE;
 	static const float MIN_TPS_DISTANCE;
-	
+
 	static const float MIN_TPS_LOOKATHEIGHT;
 	static const float MAX_TPS_LOOKATHEIGHT;
+	static const float MIN_FPS_LOOKATHEIGHT;
+	static const float MAX_FPS_LOOKATHEIGHT;
 
 	float m_tpsDistance = 2.0F; // 第三人称视角 物体到相机的距离
-	float m_tpsLookAtHeight = 0.0F;
+	float m_tpsLookAtHeight = 0.0F; 
+	float m_fpsLookAtHeight = 0.0F;
 };

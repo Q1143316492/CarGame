@@ -17,15 +17,14 @@ bool Engine::ProcessMessages()
 
 void Engine::FirstPersonFredom()
 {
-	while (!keyboard.CharBufferIsEmpty())
-	{
-		unsigned char ch = keyboard.ReadChar();
-	}
 	while (!keyboard.KeyBufferIsEmpty())
 	{
 		KeyboardEvent kbe = keyboard.ReadKey();
 		unsigned char keycode = kbe.GetKeyCode();
-		CheckGameState(keycode);
+		if (CheckGameState(keycode))
+		{
+			return;
+		}
 	}
 	while (!mouse.EventBufferIsEmpty())
 	{
@@ -68,68 +67,69 @@ void Engine::FirstPersonCamera()
 {
 	const float cameraSpeed = 0.1f;
 
-	while (!keyboard.CharBufferIsEmpty())
-	{
-		unsigned char ch = keyboard.ReadChar();
-	}
 	while (!keyboard.KeyBufferIsEmpty())
 	{
 		KeyboardEvent kbe = keyboard.ReadKey();
 		unsigned char keycode = kbe.GetKeyCode();
-		CheckGameState(keycode);
+		if (CheckGameState(keycode))
+		{
+			return;
+		}
 	}
 	while (!mouse.EventBufferIsEmpty())
 	{
 		MouseEvent me = mouse.ReadEvent();
 		if (me.GetType() == MouseEvent::EventType::RAW_MOVE)
 		{
-			//this->gfx.camera.AdjustRotation(0.0F, (float)me.GetPosX() * 0.01f, 0);
-			this->gfx.camera.AdjustThirdPersonLookAtHeight((float)me.GetPosY() * 0.01f);
+			this->gfx.camera.AdjustRotation(0.0F, (float)me.GetPosX() * 0.01f, 0.0F);
+			this->gfx.camera.AdjustFirstPersonLookAtHeight((float)me.GetPosY() * 0.01);
+			
 		}
 	}
 
-	DefaultCar oldCar;
-	oldCar.SetPosition(this->gfx.car.GetPositionFloat3());
-	oldCar.SetRotation(this->gfx.car.GetRotationFloat3());
+	float tyreRot = 0;	// 轮子左右转向旋转
+	float tyreRotForward = 0;	// 轮子是否旋转
 
 	if (keyboard.KeyIsPressed('W'))
 	{
 		this->gfx.car.MoveForward(cameraSpeed);
 		this->gfx.camera.SetPosition(gfx.car.GetPositionVector());
 		this->gfx.camera.AdjustPosition(0.0F, 1.0F, 0.0F);
+		tyreRotForward = 10;
 	}
 	if (keyboard.KeyIsPressed('S'))
 	{
 		this->gfx.car.Movebackward(cameraSpeed);
 		this->gfx.camera.SetPosition(gfx.car.GetPositionVector());
 		this->gfx.camera.AdjustPosition(0.0F, 1.0F, 0.0F);
+		tyreRotForward = -10;
 	}
 	if (keyboard.KeyIsPressed('A'))
 	{
 		this->gfx.car.TurnLeft(0.1F); 
 		this->gfx.camera.AdjustRotation(0.0F, -0.1F, 0.0F);
+		tyreRot -= 0.1F;
 	}
 	if (keyboard.KeyIsPressed('D'))
 	{
 		this->gfx.car.TurnRight(0.1F);
 		this->gfx.camera.AdjustRotation(0.0F, 0.1F, 0.0F);
+		tyreRot = 0.1F;
 	}
 
 	this->gfx.sky.MoveSkyBox(&this->gfx.car);
-	//bool crash = false;
-	//for (UINT i = 0; i < this->gfx.collisionObjects.size(); i++)
-	//{
-	//	if (CollisionDetection::CollisionDetectionModel(this->gfx.car, *this->gfx.collisionObjects[i]))
-	//	{
-	//		crash = true;
-	//		break;
-	//	}
-	//}
-	//if (crash)
-	//{
-	//	this->gfx.car.SetPosition(oldCar.GetPositionFloat3());
-	//	this->gfx.car.SetRotation(oldCar.GetRotationFloat3());
-	//}
+
+	// 轮子跟随
+	std::vector<XMFLOAT3> vecTyresPosition;
+	std::vector<XMFLOAT3> vecTyresRotation;
+	this->gfx.car.CalculateTyresPosition(vecTyresPosition);
+	this->gfx.car.CalculateTyresRotation(vecTyresRotation, tyreRotForward, tyreRot);
+	for (int i = 0; i < 4; i++)
+	{
+		this->gfx.tyres[i]->SetRotation(vecTyresRotation[i]);
+		this->gfx.tyres[i]->SetPosition(vecTyresPosition[i]);
+	}
+
 }
 
 void Engine::ThirePersonCamera()
@@ -146,7 +146,10 @@ void Engine::ThirePersonCamera()
 	{
 		KeyboardEvent kbe = keyboard.ReadKey();
 		unsigned char keycode = kbe.GetKeyCode();
-		CheckGameState(keycode);
+		if (CheckGameState(keycode))
+		{
+			return;
+		}
 	}
 	while (!mouse.EventBufferIsEmpty())
 	{
@@ -166,60 +169,86 @@ void Engine::ThirePersonCamera()
 		}
 	}
 
+	float tyreRot = 0;	// 轮子左右转向旋转
+	float tyreRotForward = 0;	// 轮子是否旋转
 	if (keyboard.KeyIsPressed('W'))
 	{
 		this->gfx.car.MoveForward(cameraSpeed);
+		tyreRotForward = 10;
 	}
 	if (keyboard.KeyIsPressed('S'))
 	{
-		this->gfx.car.Movebackward(cameraSpeed);
+		this->gfx.car.Movebackward(cameraSpeed);		
+		tyreRotForward = -10;
 	}
 	if (keyboard.KeyIsPressed('A'))
 	{
 		this->gfx.car.TurnLeft(cameraSpeed);
+		tyreRot -= 0.1F;
 	}
 	if (keyboard.KeyIsPressed('D'))
 	{
 		this->gfx.car.TurnRight(cameraSpeed);
+		tyreRot += 0.1F;
 	}
 	this->gfx.camera.SetPosition(this->gfx.car.GetPositionVector());
+
+	// 天空盒子跟随
 	this->gfx.sky.MoveSkyBox(&this->gfx.car);
+	// 轮子跟随
+	std::vector<XMFLOAT3> vecTyresPosition;
+	std::vector<XMFLOAT3> vecTyresRotation;
+	this->gfx.car.CalculateTyresPosition(vecTyresPosition);
+	this->gfx.car.CalculateTyresRotation(vecTyresRotation, tyreRotForward, tyreRot);
+	for (int i = 0; i < 4; i++)
+	{
+		this->gfx.tyres[i]->SetRotation(vecTyresRotation[i]);
+		this->gfx.tyres[i]->SetPosition(vecTyresPosition[i]);
+	}
 }
 
-void Engine::CheckGameState(unsigned char code)
+bool Engine::CheckGameState(unsigned char code)
 {
 	if (code == 0x31)
 	{
 		gameState = GameState::FIRST_PERSON_FREDOM;
 		this->gfx.camera.SetCameraType(Camera::CameraType::FIRST_PERSON);
-		ErrorLogger::Log("fredom");
-		return;
+		this->FirstPersonFredom();
+		ErrorLogger::ShowMessage("fredom mode");
+		return true;
 	}
 	if (code == 0x32)
 	{
 		gameState = GameState::FIRST_PERSON_CAMERA;
 		this->gfx.camera.SetCameraType(Camera::CameraType::FIRST_PERSON);
-		ErrorLogger::Log("first person");
+		
 		this->gfx.car.InitMatrix();
+		this->gfx.car.SetPosition(0.0F, 0.25F, 0.0F);
+
 		this->gfx.camera.InitMatrix();
-		this->gfx.car.SetPosition(0.0F, 0.1F, 0.0F);		
 		this->gfx.camera.SetPosition(gfx.car.GetPositionVector());
 		this->gfx.camera.AdjustPosition(0.0F, 2.0F, 0.0F);
-		this->gfx.camera.SetLookAtPos(gfx.car.GetPositionFloat3());
-		return;
+
+		this->FirstPersonCamera();
+		ErrorLogger::ShowMessage("first person game mode");
+		return true;
 	}
 	if (code == 0x33)
 	{
 		gameState = GameState::THIRE_PERSON_CAMERA;
 		this->gfx.camera.SetCameraType(Camera::CameraType::THIRD_PERSON);
-		ErrorLogger::Log("third person");
+		ErrorLogger::ShowMessage("third person game mode");
+
 		this->gfx.car.InitMatrix();
+		this->gfx.car.SetPosition(0.0F, 0.25F, 0.0F);
+
 		this->gfx.camera.InitMatrix();
-		this->gfx.car.SetPosition(0.0F, 0.1F, 0.0F);
 		this->gfx.camera.SetPosition(0.0F, 2.0F, 0.0F);
 		this->gfx.camera.SetLookAtPos(this->gfx.car.GetPositionFloat3());
-		return;
+		this->ThirePersonCamera();
+		return true;
 	}
+	return false;
 }
 
 void Engine::Update()
@@ -236,7 +265,6 @@ void Engine::Update()
 	{
 		this->ThirePersonCamera();
 	}
-
 }
 
 void Engine::RenderFrame()

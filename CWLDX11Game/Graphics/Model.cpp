@@ -191,6 +191,34 @@ const XMVECTOR & Model::GetLeftVector()
 	return this->vec_left;
 }
 
+const XMFLOAT3 & Model::GetForwardFloat3()
+{
+	XMFLOAT3 pos;
+	XMStoreFloat3(&this->pos, this->GetForwardVector());
+	return pos;
+}
+
+const XMFLOAT3 & Model::GetRightFloat3()
+{
+	XMFLOAT3 pos;
+	XMStoreFloat3(&this->pos, this->GetRightVector());
+	return pos;
+}
+
+const XMFLOAT3 & Model::GetBackwardFloat3()
+{
+	XMFLOAT3 pos;
+	XMStoreFloat3(&this->pos, this->GetBackwardVector());
+	return pos;
+}
+
+const XMFLOAT3 & Model::GetLeftFloat3()
+{
+	XMFLOAT3 pos;
+	XMStoreFloat3(&this->pos, this->GetLeftVector());
+	return pos;
+}
+
 CollisionType Model::GetCollisionType()
 {
 	return this->m_CollisionType;

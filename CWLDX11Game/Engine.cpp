@@ -119,7 +119,7 @@ void Engine::FirstPersonCamera()
 
 	this->gfx.sky.MoveSkyBox(&this->gfx.car);
 
-	// 轮子跟随
+	// 轮子跟随车子
 	std::vector<XMFLOAT3> vecTyresPosition;
 	std::vector<XMFLOAT3> vecTyresRotation;
 	this->gfx.car.CalculateTyresPosition(vecTyresPosition);

@@ -45,8 +45,6 @@ void Graphics::RenderFrame()
 	this->deviceContext->VSSetShader(vertexshader.GetShader(), NULL, 0);
 	this->deviceContext->PSSetShader(pixelshader.GetShader(), NULL, 0);
 
-	// todo
-	//model.Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
 	// draw
 	for (size_t i = 0; i < objects.size(); i++)
 	{
@@ -265,6 +263,7 @@ bool Graphics::InitScene()
 
 	// camera
 	camera.SetPosition(this->car.GetPositionVector());
+	camera.AdjustPosition(0.0f, 1.0f, 0.0f);
 	camera.SetProjectionValues(90.0f, static_cast<float>(windowWidth) / static_cast<float>(windowHeight), 0.1f, 1000.0f);
 
 	return true;

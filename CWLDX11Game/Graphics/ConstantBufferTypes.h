@@ -5,8 +5,8 @@
 
 struct CB_VS_vertexshader
 {
-	DirectX::XMMATRIX wvpMatrix;		// word * view * project
-	DirectX::XMMATRIX worldMatrix;
+	DirectX::XMMATRIX wvpMatrix;
+	DirectX::XMMATRIX worldMatrix;	// 用于hlsl中更新法向量
 };
 
 struct CB_PS_pixelshader

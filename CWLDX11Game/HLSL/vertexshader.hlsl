@@ -2,7 +2,7 @@
 
 cbuffer perObjectBuffer : register(b0)
 {
-	float4x4 wvpMatrix;		// word viewProject matrix
+	float4x4 wvpMatrix;
 	float4x4 worldMatrix;
 };
 struct VS_INPUT

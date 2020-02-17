@@ -1,3 +1,194 @@
-﻿  Camera.cpp
+﻿G:\0.workspace\dx11_learn\CarGame\CWLDX11Game\HLSL\pixelshader.hlsl(36,28-60): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see G:\0.workspace\dx11_learn\CarGame\x64\Debug\pixelshader.cso
+G:\0.workspace\dx11_learn\CarGame\CWLDX11Game\HLSL\vertexshader.hlsl(27,2-77): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see G:\0.workspace\dx11_learn\CarGame\x64\Debug\vertexshader.cso
+  MathTools.cpp
+g:\0.workspace\dx11_learn\cargame\cwldx11game\util\mathtools.cpp(5): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+  Cylinder.cpp
+  GameMapHelper.cpp
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.h(12): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.cpp(30): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.cpp(31): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
+  Box.cpp
+  DefaultCar.cpp
+  Engine.cpp
 g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\camera.h(18): warning C4091: “static ”: 没有声明变量时忽略“Camera::CameraType”的左侧
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.h(12): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\engine.cpp(85): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+  AdapterReader.cpp
+  Camera.cpp
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\camera.h(18): warning C4091: “static ”: 没有声明变量时忽略“Camera::CameraType”的左侧
+  GeometryFactory.cpp
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(57): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(61): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(121): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(125): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(140): warning C4244: “+=”: 从“float”转换到“int”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(142): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(143): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(150): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(151): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(155): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(156): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(160): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(161): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(162): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(165): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(166): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(167): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(169): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(172): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(176): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(191): warning C4244: “+=”: 从“float”转换到“int”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(193): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(194): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(201): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(202): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(206): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(207): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(218): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(219): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(220): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(223): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(224): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(225): warning C4244: “参数”: 从“float”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=DWORD
+          ]
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(227): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(230): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(234): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(261): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\geometryfactory.cpp(265): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+  Graphics.cpp
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\camera.h(18): warning C4091: “static ”: 没有声明变量时忽略“Camera::CameraType”的左侧
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.h(12): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+  LightHelper.cpp
+  Mesh.cpp
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\mesh.cpp(41): warning C4018: “<”: 有符号/无符号不匹配
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\mesh.cpp(49): warning C4018: “<”: 有符号/无符号不匹配
+  Model.cpp
+  Shaders.cpp
+  Texture.cpp
+  Vertex.cpp
+  KeyboardClass.cpp
+  KeyboardEvent.cpp
+  main.cpp
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\camera.h(18): warning C4091: “static ”: 没有声明变量时忽略“Camera::CameraType”的左侧
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.h(12): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+  MainWindow.cpp
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\camera.h(18): warning C4091: “static ”: 没有声明变量时忽略“Camera::CameraType”的左侧
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.h(12): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+  正在生成代码...
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\texture.cpp(29): warning C4715: “Texture::InitTexture”: 不是所有的控件路径都返回值
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\model.cpp(205): warning C4172: 返回局部变量或临时变量的地址: pos
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\model.cpp(212): warning C4172: 返回局部变量或临时变量的地址: pos
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\model.cpp(198): warning C4172: 返回局部变量或临时变量的地址: pos
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\model.cpp(219): warning C4172: 返回局部变量或临时变量的地址: pos
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\mesh.cpp(45): warning C4715: “Mesh::GetVertex”: 不是所有的控件路径都返回值
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\mesh.cpp(53): warning C4715: “Mesh::GetIndex”: 不是所有的控件路径都返回值
+g:\0.workspace\dx11_learn\cargame\cwldx11game\engine.cpp(11): warning C4715: “Engine::Init”: 不是所有的控件路径都返回值
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.cpp(38): warning C4715: “GameMapHelper::InitMaze”: 不是所有的控件路径都返回值
+  正在编译...
+  MouseClass.cpp
+  MouseEvent.cpp
+  SkyBox.cpp
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\skybox.cpp(21): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\skybox.cpp(25): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\skybox.cpp(51): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\skybox.cpp(55): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\skybox.cpp(81): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\skybox.cpp(85): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\skybox.cpp(113): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\skybox.cpp(117): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\skybox.cpp(142): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\skybox.cpp(146): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\skybox.cpp(172): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\skybox.cpp(176): warning C4267: “参数”: 从“size_t”转换到“UINT”，可能丢失数据
+  ErrorLogger.cpp
+  StringConverter.cpp
+  WindowContainer.cpp
+g:\0.workspace\dx11_learn\cargame\cwldx11game\graphics\camera.h(18): warning C4091: “static ”: 没有声明变量时忽略“Camera::CameraType”的左侧
+g:\0.workspace\dx11_learn\cargame\cwldx11game\gameobject\gamemaphelper.h(12): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+g:\0.workspace\dx11_learn\cargame\cwldx11game\windowcontainer.cpp(34): warning C4244: “参数”: 从“WPARAM”转换到“const int”，可能丢失数据
+  正在生成代码...
   CWLDX11Game.vcxproj -> G:\0.workspace\dx11_learn\CarGame\x64\Debug\CWLDX11Game.exe
